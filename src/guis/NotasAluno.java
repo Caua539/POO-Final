@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package guis;
 
 /**
  *
@@ -63,7 +63,7 @@ public class NotasAluno extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Disciplina:");
 
-        bttnDisciplina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(ITEM)", "**DISCIPLINAS DE ACORDO COM A MATRÃ?CULA" }));
+        bttnDisciplina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(ITEM)", "**DISCIPLINAS DE ACORDO COM A MATRï¿½?CULA" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("N1:");
