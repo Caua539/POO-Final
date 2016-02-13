@@ -214,8 +214,8 @@ public class PrimeiraJanela extends javax.swing.JFrame {
 
     private void bttnCadastreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCadastreActionPerformed
        //chama a proxima janela
-        Cadastro cadastro = new Cadastro();
-        cadastro.setVisible(true);
+        AlunoOrProf alunoorprof = new AlunoOrProf();
+        alunoorprof.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_bttnCadastreActionPerformed
 

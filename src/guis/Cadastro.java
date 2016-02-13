@@ -12,6 +12,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 /**
  *
@@ -38,14 +41,12 @@ public class Cadastro extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cpf = new javax.swing.JFormattedTextField();
-        modalidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
@@ -61,10 +62,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Sylfaen", 1, 24))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Modalidade:");
+        jPanel1.setBorder(new TitledBorder(new LineBorder(new Color(99, 130, 191)), "Cadastro de Professor", TitledBorder.LEADING, TitledBorder.TOP, new java.awt.Font("Sylfaen", 1, 24), null));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nome:");
@@ -80,9 +78,6 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5.setText("CPF:");
 
         cpf.setColumns(4);
-
-        modalidade.setBackground(new java.awt.Color(240, 240, 240));
-        modalidade.setFont(new java.awt.Font("Tahoma", 0, 14));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Digite sua senha:");
@@ -154,12 +149,8 @@ public class Cadastro extends javax.swing.JFrame {
         								.addGroup(jPanel1Layout.createSequentialGroup()
         									.addComponent(jLabel3)
         									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-        									.addGap(18)
-        									.addComponent(jLabel1)
-        									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(modalidade, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))
-        							.addGap(0, 219, Short.MAX_VALUE)))
+        									.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
+        							.addGap(152, 407, Short.MAX_VALUE)))
         					.addContainerGap())
         				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addComponent(jLabel7)
@@ -167,7 +158,7 @@ public class Cadastro extends javax.swing.JFrame {
         					.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
         				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addComponent(bttnSair)
-        					.addPreferredGap(ComponentPlacement.RELATED, 475, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
         					.addComponent(bttnContinuar)
         					.addGap(38))))
         );
@@ -177,9 +168,7 @@ public class Cadastro extends javax.swing.JFrame {
         			.addContainerGap()
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel3)
-        				.addComponent(matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabel1)
-        				.addComponent(modalidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addGap(20)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jLabel2)
@@ -229,6 +218,10 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void bttnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnContinuarActionPerformed
        
+    	DisciplinasProfessor disprof = new DisciplinasProfessor();
+    	disprof.setVisible(true);
+    	setVisible(false);
+    	
     }//GEN-LAST:event_bttnContinuarActionPerformed
 
     private void bttnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSairActionPerformed
@@ -279,7 +272,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPasswordField confirmaSenha;
     private javax.swing.JFormattedTextField cpf;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -290,7 +282,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField matricula;
-    private javax.swing.JTextField modalidade;
     private javax.swing.JTextField nome;
     private javax.swing.JPasswordField senha;
     // End of variables declaration//GEN-END:variables
