@@ -1,5 +1,7 @@
 package guis;
 
+import mainpkg.*;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -19,6 +21,12 @@ public class AlunoOrProf extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JButton AlunoButton;
 	private JButton ProfButton;
+	private PrimeiraJanela inicial;
+	private JButton btnVoltar;
+	
+	public void setIniciar(PrimeiraJanela iniciar){
+		this.inicial = iniciar;
+	}
 
 	/**
 	 * Launch the application.
@@ -56,22 +64,37 @@ public class AlunoOrProf extends JDialog {
 			ProfButton = new JButton("Professor");
 			ProfButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Professor novoprof = new Professor();
+					ObjArrays.criarProfessores(novoprof);
 					Cadastro cadastroprof = new Cadastro();
+					cadastroprof.setInicial(inicial);
 					cadastroprof.setVisible(true);
 					setVisible(false);
 				}
 			});
 			ProfButton.setActionCommand("");
 		}
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inicial.setVisible(true);
+				setVisible(false);
+				
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
-			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPanel.createSequentialGroup()
+			gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGap(31)
 					.addComponent(AlunoButton, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
 					.addComponent(ProfButton, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
 					.addGap(31))
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap(140, Short.MAX_VALUE)
+					.addComponent(btnVoltar, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
+					.addGap(138))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -80,7 +103,9 @@ public class AlunoOrProf extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(AlunoButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 						.addComponent(ProfButton, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(110, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+					.addComponent(btnVoltar)
+					.addGap(27))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}

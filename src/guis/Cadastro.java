@@ -5,6 +5,8 @@
  */
 package guis;
 
+import mainpkg.*;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
@@ -15,12 +17,26 @@ import javax.swing.GroupLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  *
  * @author Ana Luísa
  */
 public class Cadastro extends javax.swing.JFrame {
+	
+	private PrimeiraJanela inicial;
+	private boolean senhasconferem = true;
+	
+	public void setInicial(PrimeiraJanela inicial){
+		this.inicial = inicial;
+	}
 
     /**
      * Creates new form Protótipo
@@ -45,14 +61,26 @@ public class Cadastro extends javax.swing.JFrame {
         nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        cpf = new javax.swing.JFormattedTextField();
+        matricula.setBackground(Color.LIGHT_GRAY);
         jLabel4 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         confirmaSenha = new javax.swing.JPasswordField();
-        jPanel2 = new javax.swing.JPanel();
+        confirmaSenha.addFocusListener(new FocusAdapter() {
+        	public void focusLost(FocusEvent e) {
+        		String strConf = new String(confirmaSenha.getPassword());
+        		String strSenha = new String(senha.getPassword());
+        		if (!(strConf.equals(strSenha))){
+        			confirmpasswrong.setText("Senhas não conferem");
+        			senhasconferem = false;
+        		}
+        		else {
+        			confirmpasswrong.setText("");
+        			senhasconferem = true;
+        		}
+    		}
+        });
         bttnContinuar = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
 
@@ -73,11 +101,9 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3.setText("Matr\u00EDcula");
 
         matricula.setFont(new java.awt.Font("Tahoma", 0, 14));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("CPF:");
-
-        cpf.setColumns(4);
+        String text = "2016-"+ObjArrays.getFormattedMatricula(ObjArrays.getFinalProf());
+        matricula.setText(text);
+        matricula.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Digite sua senha:");
@@ -92,17 +118,6 @@ public class Cadastro extends javax.swing.JFrame {
 
         confirmaSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         confirmaSenha.setToolTipText("");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 77, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 31, Short.MAX_VALUE)
-        );
 
         bttnContinuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         bttnContinuar.setText("Continuar");
@@ -119,113 +134,112 @@ public class Cadastro extends javax.swing.JFrame {
                 bttnSairActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel2)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(nome, 601, 601, 601))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addComponent(jLabel4)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(senha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(jLabel6)
-        							.addPreferredGap(ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
-        							.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(jPanel1Layout.createSequentialGroup()
-        							.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        								.addGroup(jPanel1Layout.createSequentialGroup()
-        									.addComponent(jLabel5)
-        									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(cpf, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE))
-        								.addGroup(jPanel1Layout.createSequentialGroup()
-        									.addComponent(jLabel3)
-        									.addPreferredGap(ComponentPlacement.RELATED)
-        									.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
-        							.addGap(152, 407, Short.MAX_VALUE)))
-        					.addContainerGap())
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addComponent(jLabel7)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addComponent(bttnSair)
-        					.addPreferredGap(ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
-        					.addComponent(bttnContinuar)
-        					.addGap(38))))
+        
+        confirmpasswrong = new JLabel();
+        confirmpasswrong.setForeground(Color.RED);
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel3)
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
+        gl_jPanel1.setHorizontalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGap(12)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel3)
+        					.addGap(12)
+        					.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel2)
+        					.addGap(12)
+        					.addComponent(nome, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel4)
+        					.addGap(12)
+        					.addComponent(senha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+        					.addGap(12)
+        					.addComponent(jLabel6))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel7)
+        					.addGap(12)
+        					.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+        					.addGap(12)
+        					.addComponent(confirmpasswrong, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(bttnSair)
+        					.addGap(297)
+        					.addComponent(bttnContinuar))))
+        );
+        gl_jPanel1.setVerticalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGap(12)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(2)
+        					.addComponent(jLabel3))
         				.addComponent(matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addGap(20)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jLabel2)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(2)
+        					.addComponent(jLabel2))
         				.addComponent(nome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(20)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(jLabel5)
-        						.addComponent(cpf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(20)
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(jLabel4)
-        						.addComponent(senha, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(jLabel6))
-        					.addGap(20))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGap(26)))
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(confirmaSenha, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(jLabel7))
-        			.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(bttnContinuar)
-        				.addComponent(bttnSair)))
+        			.addGap(18)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(2)
+        					.addComponent(jLabel4))
+        				.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(3)
+        					.addComponent(jLabel6)))
+        			.addGap(18)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(2)
+        					.addComponent(jLabel7))
+        				.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(confirmpasswrong))
+        			.addGap(18)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addComponent(bttnSair)
+        				.addComponent(bttnContinuar)))
         );
-        jPanel1.setLayout(jPanel1Layout);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
-        );
+        jPanel1.setLayout(gl_jPanel1);
+        getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnContinuarActionPerformed
-       
-    	DisciplinasProfessor disprof = new DisciplinasProfessor();
-    	disprof.setVisible(true);
-    	setVisible(false);
+        if(senhasconferem == true){
+        	String strSenha = new String(senha.getPassword());
+        	ObjArrays.setDadosProfessores(nome.getText(),strSenha);
+        	DisciplinasProfessor disprof = new DisciplinasProfessor();
+        	disprof.setVisible(true);
+        	setVisible(false);
+        }
+    	
+    	
     	
     }//GEN-LAST:event_bttnContinuarActionPerformed
 
     private void bttnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSairActionPerformed
-        System.exit(0);
+    	inicial.setVisible(true);
+    	setVisible(false);
+    	
     }//GEN-LAST:event_bttnSairActionPerformed
 
     /**
@@ -264,26 +278,25 @@ public class Cadastro extends javax.swing.JFrame {
                 new Cadastro().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bttnContinuar;
     private javax.swing.JButton bttnSair;
     private javax.swing.JPasswordField confirmaSenha;
-    private javax.swing.JFormattedTextField cpf;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField matricula;
     private javax.swing.JTextField nome;
     private javax.swing.JPasswordField senha;
+    private JLabel confirmpasswrong;
     // End of variables declaration//GEN-END:variables
 
     private void cadastraDados() {
