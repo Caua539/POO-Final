@@ -4,9 +4,6 @@ public class Professor extends Cadastrado {
 	
 	private int disciplinasMinistradas[] = {0, 0, 0, 0, 0};
 
-	public String getMatricula(){
-		return matricula;
-	}
 	
 	public void setMatricula(int matricula){
 		String formatted = String.format("%03d", matricula);

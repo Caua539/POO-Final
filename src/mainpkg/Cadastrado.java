@@ -6,6 +6,10 @@ public class Cadastrado {
 	protected String nome;
 	protected String senha;
 	
+	public String getMatricula(){
+		return matricula;
+	}
+	
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}

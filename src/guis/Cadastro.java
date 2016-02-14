@@ -61,28 +61,14 @@ public class Cadastro extends javax.swing.JFrame {
         nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
-        matricula.setBackground(Color.LIGHT_GRAY);
         jLabel4 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         confirmaSenha = new javax.swing.JPasswordField();
-        confirmaSenha.addFocusListener(new FocusAdapter() {
-        	public void focusLost(FocusEvent e) {
-        		String strConf = new String(confirmaSenha.getPassword());
-        		String strSenha = new String(senha.getPassword());
-        		if (!(strConf.equals(strSenha))){
-        			confirmpasswrong.setText("Senhas não conferem");
-        			senhasconferem = false;
-        		}
-        		else {
-        			confirmpasswrong.setText("");
-        			senhasconferem = true;
-        		}
-    		}
-        });
         bttnContinuar = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
+        confirmpasswrong = new JLabel();
 
         jButton1.setText("jButton1");
 
@@ -101,6 +87,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3.setText("Matr\u00EDcula");
 
         matricula.setFont(new java.awt.Font("Tahoma", 0, 14));
+        matricula.setBackground(Color.LIGHT_GRAY);
         matricula.setText(ObjArrays.getProfMatricula(ObjArrays.getFinalProf()));
         matricula.setEditable(false);
 
@@ -117,6 +104,20 @@ public class Cadastro extends javax.swing.JFrame {
 
         confirmaSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         confirmaSenha.setToolTipText("");
+        confirmaSenha.addFocusListener(new FocusAdapter() {
+        	public void focusLost(FocusEvent e) {
+        		String strConf = new String(confirmaSenha.getPassword());
+        		String strSenha = new String(senha.getPassword());
+        		if (!(strConf.equals(strSenha))){
+        			confirmpasswrong.setText("Senhas não conferem");
+        			senhasconferem = false;
+        		}
+        		else {
+        			confirmpasswrong.setText("");
+        			senhasconferem = true;
+        		}
+    		}
+        });
 
         bttnContinuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         bttnContinuar.setText("Continuar");
@@ -134,7 +135,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         
-        confirmpasswrong = new JLabel();
+        
         confirmpasswrong.setForeground(Color.RED);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(

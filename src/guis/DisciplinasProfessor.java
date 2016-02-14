@@ -31,7 +31,6 @@ public class DisciplinasProfessor extends javax.swing.JFrame {
 
 	private boolean discNonRepeatable = false;
 	private JTextField[] DisciplinasVer = {null, null, null, null, null}; //Armazena as disciplinas com nome igual, serve pra verificar as que ainda estão em vermelho e branqueá-las. Pura gambiarra
-    private int discContador =0;
     private Cadastro castro;
     
     public void setCastro(Cadastro castro) {
@@ -346,7 +345,7 @@ public class DisciplinasProfessor extends javax.swing.JFrame {
     	if (nome.equals("") | modalidade.equals("")){
     		return;
     	}
-    	else ObjArrays.setDisciplinas(nome, modalidade);
+    	else ObjArrays.adicionarProfDisciplina(ObjArrays.setDisciplinas(nome, modalidade));
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
     	//GEN-FIRST:event_jButton5ActionPerformed

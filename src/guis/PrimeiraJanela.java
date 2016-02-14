@@ -5,6 +5,8 @@
  */
 package guis;
 
+import mainpkg.ObjArrays;
+
 /**
  *
  * @authors Ana Luísa e Paula
@@ -250,6 +252,20 @@ public class PrimeiraJanela extends javax.swing.JFrame {
                 new PrimeiraJanela().setVisible(true);
             }
         });
+        
+        ObjArrays.setDisciplinas("Língua Portuguesa I", "Humanas");
+        ObjArrays.setDisciplinas("Geografia Fisica I", "Humanas");
+        ObjArrays.setDisciplinas("História do Brasil I", "Humanas");
+        ObjArrays.setDisciplinas("Filosofia I", "Humanas");
+        ObjArrays.setDisciplinas("Sociologia I", "Humanas");
+        ObjArrays.setDisciplinas("Lingua Inglesa I", "Humanas");
+        ObjArrays.setDisciplinas("Matemática Básica I", "Exatas");
+        ObjArrays.setDisciplinas("Física Elétrica I", "Exatas");
+        ObjArrays.setDisciplinas("Química Orgânica I", "Exatas");
+        ObjArrays.setDisciplinas("Ecologia I", "Biológicas");
+        ObjArrays.setDisciplinas("Genética I", "Biológicas");
+        ObjArrays.setDisciplinas("Bioquímica I", "Biológicas");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
