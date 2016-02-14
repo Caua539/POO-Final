@@ -190,26 +190,10 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     }//GEN-LAST:event_bttnSairActionPerformed
 
     private void bttnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEntrarActionPerformed
-       
-              
-        //apagar esse bloco de code quando estiver escrevendo
-            CadastroNota notasPro = new CadastroNota();
-            notasPro.setVisible(true);
-            setVisible(false);
-            
-        /*fazer comparação de matriculas, se remeter ao professor:
-            CadastroNota cadastroNota = new CadastroNota();
-            cadastroNota.setVisible(true);
-            setVisible(false);
-        
-        else
-        
-            NotasAluno notasAluno = new NotasAluno();
-            notasAluno.setVisible(true);
-            setVisible(false);*/
-        
-         validaCadastro();
- 
+    	EmConstrucao constr = new EmConstrucao();
+    	constr.setVisible(true);
+    	setVisible(false);
+    	
     }//GEN-LAST:event_bttnEntrarActionPerformed
 
     private void bttnCadastreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCadastreActionPerformed

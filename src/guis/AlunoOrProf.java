@@ -53,9 +53,9 @@ public class AlunoOrProf extends JDialog {
 			AlunoButton = new JButton("Aluno");
 			AlunoButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					CadastroAlun cadastroalun = new CadastroAlun();
-					cadastroalun.setVisible(true);
-					setVisible(false);
+					EmConstrucao constr = new EmConstrucao();
+			    	constr.setVisible(true);
+			    	setVisible(false);
 				}
 			});
 			AlunoButton.setActionCommand("");
