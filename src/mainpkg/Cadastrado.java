@@ -2,11 +2,11 @@ package mainpkg;
 
 public class Cadastrado {
 	
-	protected int matricula;
+	protected String matricula;
 	protected String nome;
 	protected String senha;
 	
-	public void setMatricula(int matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 	

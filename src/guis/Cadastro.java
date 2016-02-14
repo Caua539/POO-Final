@@ -27,7 +27,7 @@ import java.awt.event.FocusEvent;
 
 /**
  *
- * @author Ana Luísa
+ * @author Ana Luísa, Cauã
  */
 public class Cadastro extends javax.swing.JFrame {
 	
@@ -101,8 +101,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel3.setText("Matr\u00EDcula");
 
         matricula.setFont(new java.awt.Font("Tahoma", 0, 14));
-        String text = "2016-"+ObjArrays.getFormattedMatricula(ObjArrays.getFinalProf());
-        matricula.setText(text);
+        matricula.setText(ObjArrays.getProfMatricula(ObjArrays.getFinalProf()));
         matricula.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -228,6 +227,7 @@ public class Cadastro extends javax.swing.JFrame {
         	String strSenha = new String(senha.getPassword());
         	ObjArrays.setDadosProfessores(nome.getText(),strSenha);
         	DisciplinasProfessor disprof = new DisciplinasProfessor();
+        	disprof.setCastro(this);
         	disprof.setVisible(true);
         	setVisible(false);
         }
