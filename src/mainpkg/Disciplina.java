@@ -1,23 +1,29 @@
 package mainpkg;
 
 import java.util.*;
+import java.io.Serializable;
 import java.text.*;
 
 
-public class Disciplina {
+public class Disciplina implements Serializable {
 
 	private String nome;
 	private String modalidade;
 	private int cod;
 	private boolean hasProf = false;
+	private boolean hasAluno = false;
+	private int contadorAlunos = 0;
 	private int contadorProfs = 0;
-	private String[] professoresCod = {null, null, null, null, null, null, null};
+	private String[] alunosCod = new String[30];
+	private String[] professoresCod = new String[5];
 	
 	
 	public Disciplina(int cod, String nome, String modalidade){
 		this.cod = cod;
 		this.setNome(nome);
 		this.setModalidade(modalidade);
+		for (int i = 0; i < 5; i++) professoresCod[i] = null;
+		for (int i = 0; i < 30; i++) alunosCod[i] = null;
 	}
 	
 	public String getNome() {
@@ -46,10 +52,32 @@ public class Disciplina {
 		this.cod = cod;
 	}
 	
+	public String[] getAlunoCod(){
+		int tamString = 0;
+		for (int i = 0; i<30; i++){
+			if (alunosCod[i] != null){
+				tamString++;
+			}
+		}
+		String[] plhString = new String[tamString];
+		for(int i=0; i< tamString; i++){
+			plhString[i] = alunosCod[i]+"       "+ObjArrays.buscaAluno(alunosCod[i]).getNome();
+			System.out.println(plhString[i]);
+		}
+		
+		return plhString;
+	}
+	
 	public void addProfessor(String matricula){
 		this.professoresCod[contadorProfs] = matricula;
 		this.contadorProfs++;
 		this.hasProf = true;
+	}
+	
+	public void addAluno(String matricula){
+		this.alunosCod[contadorAlunos] = matricula;
+		this.contadorAlunos++;
+		this.hasAluno = true;
 	}
 	
 	public void removeProfessor(String matricula){
@@ -62,6 +90,18 @@ public class Disciplina {
 		}
 		if (contadorProfs < 0) contadorProfs = 0;
 		if (contadorProfs == 0) this.hasProf = false;
+	}
+	
+	public void removeAluno(String matricula){
+		for(int i = 0; i < this.contadorAlunos; i++){
+			if(this.alunosCod[i].equals(matricula)){
+				this.alunosCod[i] = null;
+				this.contadorAlunos--;
+				break;
+			}
+		}
+		if (contadorAlunos < 0) contadorAlunos = 0;
+		if (contadorAlunos == 0) this.hasAluno = false;
 	}
 	
 }

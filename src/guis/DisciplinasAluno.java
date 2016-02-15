@@ -125,7 +125,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         jLabel17.setText("H -");
         
         
-        ListaDisc1.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc1.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc1.setBackground(Color.WHITE);
         ListaDisc1.addFocusListener(new FocusAdapter() {
         	@Override
@@ -133,7 +133,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade1.setText(ObjArrays.getModalidade(ListaDisc1.getSelectedItem().toString()));
         	}
         });
-        ListaDisc2.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc2.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc2.setBackground(Color.WHITE);
         ListaDisc2.addFocusListener(new FocusAdapter() {
         	@Override
@@ -141,7 +141,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade2.setText(ObjArrays.getModalidade(ListaDisc2.getSelectedItem().toString()));
         	}
         });
-        ListaDisc3.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc3.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc3.setBackground(Color.WHITE);
         ListaDisc3.addFocusListener(new FocusAdapter() {
         	@Override
@@ -149,7 +149,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade3.setText(ObjArrays.getModalidade(ListaDisc3.getSelectedItem().toString()));
         	}
         });
-        ListaDisc4.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc4.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc4.setBackground(Color.WHITE);
         ListaDisc4.addFocusListener(new FocusAdapter() {
         	@Override
@@ -157,7 +157,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade4.setText(ObjArrays.getModalidade(ListaDisc4.getSelectedItem().toString()));
         	}
         });
-        ListaDisc5.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc5.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc5.setBackground(Color.WHITE);
         ListaDisc5.addFocusListener(new FocusAdapter() {
         	@Override
@@ -165,7 +165,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade5.setText(ObjArrays.getModalidade(ListaDisc5.getSelectedItem().toString()));
         	}
         });
-        ListaDisc6.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc6.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc6.setBackground(Color.WHITE);
         ListaDisc6.addFocusListener(new FocusAdapter() {
         	@Override
@@ -173,7 +173,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade6.setText(ObjArrays.getModalidade(ListaDisc6.getSelectedItem().toString()));
         	}
         });
-        ListaDisc7.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc7.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc7.setBackground(Color.WHITE);
         ListaDisc7.addFocusListener(new FocusAdapter() {
         	@Override
@@ -181,7 +181,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         		lblModalidade7.setText(ObjArrays.getModalidade(ListaDisc7.getSelectedItem().toString()));
         	}
         });
-        ListaDisc8.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
+        ListaDisc8.setModel(new DefaultComboBoxModel(dropmenu()));
         ListaDisc8.setBackground(Color.WHITE);
         ListaDisc8.addFocusListener(new FocusAdapter() {
         	@Override
@@ -418,6 +418,7 @@ public class DisciplinasAluno extends javax.swing.JFrame {
         
         if (Disciplinas[x].getSelectedItem().toString().equals("")) return true;
 		for(int i = 0; i < 8; i++){
+			
 			if (x == i) continue;
 			else if (collator.compare(Disciplinas[x].getSelectedItem().toString(), Disciplinas[i].getSelectedItem().toString())==0){
     			Disciplinas[x].setBackground(Color.RED);
@@ -485,6 +486,18 @@ public class DisciplinasAluno extends javax.swing.JFrame {
 	        setVisible(false);
     	}
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private String[] dropmenu(){
+    	String[] source = ObjArrays.getArrayDisciplinas();
+    	String[] dropdown = new String[source.length+1];
+    	dropdown[0] = "";
+    	int j = 1;
+    	for(int i =0; i < source.length; i++){
+    		dropdown[j] = source[i];
+    		j++;
+    	}
+    	return dropdown;    	
+    }
 
     /**
      * @param args the command line arguments

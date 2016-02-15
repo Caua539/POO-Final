@@ -5,7 +5,20 @@
  */
 package guis;
 
-import mainpkg.ObjArrays;
+import mainpkg.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import javax.swing.GroupLayout;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -29,27 +42,16 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        senha = new javax.swing.JTextField();
         bttnEntrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         bttnCadastre = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,25 +61,11 @@ public class PrimeiraJanela extends javax.swing.JFrame {
 
         matricula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         matricula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        matricula.setName(""); // NOI18N
-        matricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaActionPerformed(evt);
-            }
-        });
+        matricula.setName("");
 
         jLabel2.setText("Matr\u00EDcula");
 
         jLabel3.setText("Senha");
-
-        senha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        senha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        senha.setName(""); // NOI18N
-        senha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                senhaActionPerformed(evt);
-            }
-        });
 
         bttnEntrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bttnEntrar.setText("Entrar");
@@ -104,62 +92,65 @@ public class PrimeiraJanela extends javax.swing.JFrame {
                 bttnSairActionPerformed(evt);
             }
         });
+        
+        senha = new JPasswordField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(bttnCadastre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bttnSair)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(bttnEntrar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4))
-                .addGap(0, 0, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addComponent(bttnCadastre)
+        			.addPreferredGap(ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+        			.addComponent(bttnSair)
+        			.addContainerGap())
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(283)
+        					.addComponent(jLabel1))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(103)
+        					.addComponent(bttnEntrar))
+        				.addComponent(jLabel4)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGap(79)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+        						.addComponent(senha, Alignment.LEADING)
+        						.addComponent(matricula, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
+        			.addGap(0, 0, Short.MAX_VALUE))
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(107)
+        			.addComponent(jLabel2)
+        			.addContainerGap(110, Short.MAX_VALUE))
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(114)
+        			.addComponent(jLabel3)
+        			.addContainerGap(124, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(matricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(senha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(bttnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bttnCadastre)
-                    .addComponent(bttnSair))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(jLabel1)
+        			.addGap(28)
+        			.addComponent(jLabel2)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(matricula, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(19)
+        			.addComponent(jLabel3)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(senha, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(bttnEntrar, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(jLabel4)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(bttnCadastre)
+        				.addComponent(bttnSair))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,26 +166,47 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
-        validaMatricula();
-    }//GEN-LAST:event_matriculaActionPerformed
-
-    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
-        validaSenha();
-    }//GEN-LAST:event_senhaActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void bttnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnSairActionPerformed
+    	
+    	try {
+			FileOutputStream fout = new FileOutputStream("dados.txt");
+	    	ObjectOutputStream oos = new ObjectOutputStream(fout);
+	    	oos.writeObject(ObjArrays.getProfessores());
+	    	oos.writeObject(ObjArrays.getDisciplinas());
+	    	oos.writeObject(ObjArrays.getAlunos());
+	    	oos.writeInt(ObjArrays.getFinalProf());
+	    	oos.writeInt(ObjArrays.getFinaldisc());
+	    	oos.writeInt(ObjArrays.getFinalAlun());
+	    	oos.close();
+	    	System.out.println("DONE");
+    	}
+    	catch(Exception ex){
+    		ex.printStackTrace();
+    	}
+    	
         System.exit(0);
     }//GEN-LAST:event_bttnSairActionPerformed
 
-    private void bttnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnEntrarActionPerformed
-    	EmConstrucao constr = new EmConstrucao();
-    	constr.setVisible(true);
-    	setVisible(false);
+    private void bttnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
+    	//GEN-FIRST:event_bttnEntrarActionPerformed
+    	String strSenha = new String(senha.getPassword());
+    	if (matricula.getText().length() == 8){
+    		Professor prof = validaCadastroProf(matricula.getText(), strSenha);
+    		if (prof != null) {
+    			ProfConsultaDisciplina disc = new ProfConsultaDisciplina(prof);
+    			disc.setInicial(this);
+    			disc.setVisible(true);
+    			setVisible(false);
+    		}
+    	}
+    	else if (matricula.getText().length() == 10){
+    		if (validaCadastroAluno(matricula.getText(), strSenha) != null) {
+    			EmConstrucao emcons = new EmConstrucao();
+    			emcons.setVisible(true);
+    			setVisible(false);
+    		}
+    	}
     	
     }//GEN-LAST:event_bttnEntrarActionPerformed
 
@@ -253,7 +265,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
             }
         });
         
-        ObjArrays.setDisciplinas("Língua Portuguesa I", "Humanas");
+        /*ObjArrays.setDisciplinas("Língua Portuguesa I", "Humanas");
         ObjArrays.setDisciplinas("Geografia Fisica I", "Humanas");
         ObjArrays.setDisciplinas("História do Brasil I", "Humanas");
         ObjArrays.setDisciplinas("Filosofia I", "Humanas");
@@ -264,7 +276,24 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         ObjArrays.setDisciplinas("Química Orgânica I", "Exatas");
         ObjArrays.setDisciplinas("Ecologia I", "Biológicas");
         ObjArrays.setDisciplinas("Genética I", "Biológicas");
-        ObjArrays.setDisciplinas("Bioquímica I", "Biológicas");
+        ObjArrays.setDisciplinas("Bioquímica I", "Biológicas");*/
+        try {
+    		FileInputStream fin = new FileInputStream("dados.txt");
+	    	ObjectInputStream ois = new ObjectInputStream(fin);
+	    	//ObjArrays objeto = (ObjArrays) ois.readObject();
+	    	ObjArrays.setProfessoresArray((ArrayList<Professor>) ois.readObject());
+	    	ObjArrays.setDisciplinasArray((ArrayList<Disciplina>) ois.readObject());
+	    	ObjArrays.setAlunosArray((ArrayList<Aluno>) ois.readObject());
+	    	ObjArrays.setFinalProf(ois.readInt());
+	    	ObjArrays.setFinalDisc(ois.readInt());
+	    	ObjArrays.setFinalAlun(ois.readInt());
+	    	ois.close();
+	    	System.out.println(ObjArrays.getProfessores().get(0).getMatricula());
+    	}
+    	catch (Exception ex){
+    		ex.printStackTrace();
+    	}
+        
         
     }
 
@@ -280,21 +309,31 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField matricula;
-    private javax.swing.JTextField senha;
+    private JPasswordField senha;
     // End of variables declaration//GEN-END:variables
 
-    private void validaMatricula() {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //usar arquivos para comparar se o input da matricula consta no cadastro
-    }
 
-    private void validaSenha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //usar arquivos para comparar se o input da matricula consta no cadastro
-    }
+    private Professor validaCadastroProf(String matricula, String senha) {
+        Professor prof = ObjArrays.buscaProfessor(matricula);
+        if (prof != null){
+        	if (senha.equals(prof.getSenha())){
+        		return prof;
+        	}
+        	else return null;
+        }
+        else return null;
 
-    private void validaCadastro() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-       //usar arquivos para comparar se o cadastro é válido
+    }
+    
+    private Aluno validaCadastroAluno(String matricula, String senha) {
+        Aluno aluno = ObjArrays.buscaAluno(matricula);
+        if (aluno != null){
+        	if (senha.equals(aluno.getSenha())){
+        		return aluno;
+        	}
+        	else return null;
+        }
+        else return null;
+
     }
 }

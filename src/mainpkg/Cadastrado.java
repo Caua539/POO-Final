@@ -1,6 +1,8 @@
 package mainpkg;
 
-public class Cadastrado {
+import java.io.Serializable;
+public class Cadastrado 
+			implements Serializable {
 	
 	protected String matricula;
 	protected String nome;

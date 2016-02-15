@@ -5,16 +5,40 @@
  */
 package guis;
 
+import mainpkg.*;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.text.DecimalFormat;
+import java.util.InputMismatchException;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author Ana Luísa
  */
 public class NotasAluno extends javax.swing.JFrame {
 
+	
+	private static Aluno aluno;
+	private ProfSelecionaAluno lastWindow;
+	private double[] notas = {0, 0, 0};
+	
+	public void setLastWindow(ProfSelecionaAluno window){
+		this.lastWindow = window;
+	}
     /**
      * Creates new form NotasAluno
      */
-    public NotasAluno() {
+    public NotasAluno(Aluno aluno) {
+    	this.aluno = aluno;
         initComponents();
     }
 
@@ -31,22 +55,21 @@ public class NotasAluno extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        lblCursando = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        bttnDisciplina = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        n1 = new javax.swing.JTextField();
+        n2 = new javax.swing.JTextField();
+        n3 = new javax.swing.JTextField();
         media = new javax.swing.JTextField();
-        result = new javax.swing.JTextField();
+        
 
         jTextField1.setText("jTextField1");
+        
 
         jLabel2.setText("jLabel2");
 
@@ -58,12 +81,7 @@ public class NotasAluno extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Notas", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Disciplina:");
-
-        bttnDisciplina.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "(ITEM)", "**DISCIPLINAS DE ACORDO COM A MATR�?CULA" }));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Notas de "+aluno.getNome(), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("N1:");
@@ -77,29 +95,54 @@ public class NotasAluno extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Média:");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Resultado:");
-
-        jTextField.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldActionPerformed(evt);
-            }
+        n1.setBackground(Color.WHITE);
+        n1.setFont(new java.awt.Font("Tahoma", 0, 12));
+        n1.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		try {
+        		  double usrInput= Double.parseDouble(n1.getText());
+        		}
+        		catch(NumberFormatException exception) {
+        		  System.out.println("This is not a double");
+        		  n1.setText("");
+        		}
+        	}
         });
 
-        jTextField2.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
+        n2.setBackground(Color.WHITE);
+        n2.setFont(new java.awt.Font("Tahoma", 0, 12));
+        n2.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		try {
+          		  double usrInput= Double.parseDouble(n2.getText());
+          		}
+          		catch(NumberFormatException exception) {
+          		  System.out.println("This is not a double");
+          		  n2.setText("");
+          		}
+        	}
         });
 
-        jTextField3.setBackground(new java.awt.Color(240, 240, 240));
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
+        n3.setBackground(Color.WHITE);
+        n3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        n3.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		try {
+          		  double usrInput= Double.parseDouble(n3.getText());
+          		}
+          		catch(NumberFormatException exception) {
+          		  System.out.println("This is not a double");
+          		  n3.setText("");
+          		}
+        	}
+        });
+        
+        
         media.setBackground(new java.awt.Color(240, 240, 240));
+        media.setEditable(false);
         media.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         media.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,103 +150,197 @@ public class NotasAluno extends javax.swing.JFrame {
             }
         });
 
-        result.setBackground(new java.awt.Color(240, 240, 240));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(bttnDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                                .addComponent(jLabel4))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel11))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(media, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(media, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(bttnDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
-        );
-
-        result.getAccessibleContext().setAccessibleName("");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
+        
+        lblCursando.setText("Cursando");
+        lblCursando.setFont(new Font("Dialog", Font.BOLD, 20));
+        
+        JButton btnVoltar = new JButton("Voltar");
+        
+        JButton btnAlterarNotas = new JButton("Alterar Notas");
+        btnAlterarNotas.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		bttnAlterarPerformed();
+        	}
+        });
+        
+        JButton btnNewButton = new JButton("Enviar Notas");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		bttnEnviarPerformed();
+        	}
+        });
+        
+        JButton btnVerMdia = new JButton("Confirmar Notas");
+        btnVerMdia.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		bttnConfirmarPerformed();
+        	}
+        });
+        GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
+        gl_jPanel1.setHorizontalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel12)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(81)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING, false)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel4)
+        							.addGap(26)
+        							.addComponent(n1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel6)
+        							.addGap(26)
+        							.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel11)
+        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(btnVoltar)
+        					.addGap(29)
+        					.addComponent(btnAlterarNotas)
+        					.addGap(18)
+        					.addComponent(btnNewButton)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        		.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        			.addContainerGap(253, Short.MAX_VALUE)
+        			.addComponent(btnVerMdia)
+        			.addContainerGap())
+        );
+        gl_jPanel1.setVerticalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(12)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(2)
+        							.addComponent(jLabel4))
+        						.addComponent(n1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(12)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(2)
+        							.addComponent(jLabel6))
+        						.addComponent(n2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(24)
+        					.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel11)
+        						.addComponent(n3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(31)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel12)
+        						.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(59)
+        			.addComponent(btnVerMdia)
+        			.addGap(18)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnVoltar)
+        				.addComponent(btnAlterarNotas)
+        				.addComponent(btnNewButton))
+        			.addContainerGap())
+        );
+        jPanel1.setLayout(gl_jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void bttnConfirmarPerformed(){
+    	System.out.println(n3.getText());
+    	if (!n1.getText().equals("")){
+    		notas[0] = Double.parseDouble(n1.getText());
+    	}
+    	else notas[0] = 0.0;
+    	if (!n2.getText().equals("")){
+    		notas[1] = Double.parseDouble(n2.getText());
+    	}
+    	else notas[1] = 0.0;
+    	if (!n3.getText().equals("")){
+    		notas[2] = Double.parseDouble(n3.getText());
+    	}
+    	else notas[2] = 0.0;
+    	
+    	if (notas[0] > 10.0 | notas[0] < 0.0){
+    		n1.setText("");
+    		return;
+    	}
+    	else if(notas[1] > 10.0 | notas[1] < 0.0){
+    		n2.setText("");
+    		return;
+    	}
+    	else if (notas[2] > 10.0 | notas[2] < 0.0){
+    		n3.setText("");
+    		return;
+    	}
+    	DecimalFormat numberFormat = new DecimalFormat("#.00");
+    	double theMedia = aluno.getMedia(notas[0], notas[1], notas[2]);
+    	String mediaStr = String.valueOf(numberFormat.format(theMedia));
+    	media.setText(mediaStr);
+        n1.setEditable(false);
+        n1.setBackground(Color.LIGHT_GRAY);
+        n2.setEditable(false);
+        n2.setBackground(Color.LIGHT_GRAY);
+        n3.setEditable(false);
+        n3.setBackground(Color.LIGHT_GRAY);
+        
+        if (!n3.getText().equals("") & theMedia >= 6.0){
+        	lblCursando.setText("Aprovado");
+        }
+        else if (!n3.getText().equals("") & theMedia < 6.0){
+        	lblCursando.setText("Reprovado");
+        }
+        else if (n3.getText().equals("")){
+        	lblCursando.setText("Cursando");
+        }
+    	
+    }
+    
+    private void bttnAlterarPerformed(){
+    	n1.setEditable(true);
+        n1.setBackground(Color.WHITE);
+        n2.setEditable(true);
+        n2.setBackground(Color.WHITE);
+        n3.setEditable(true);
+        n3.setBackground(Color.WHITE);
+    }
+    
+    private void bttnEnviarPerformed(){
+    	bttnConfirmarPerformed();
+    	aluno.setNotas(notas[0], notas[1], notas[2]);
+    }
 
     private void mediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediaActionPerformed
         //consultaDisciplinas
     }//GEN-LAST:event_mediaActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,29 +372,25 @@ public class NotasAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NotasAluno().setVisible(true);
+                new NotasAluno(aluno).setVisible(true);
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox bttnDisciplina;
-    private javax.swing.JLabel jLabel1;
+    
+    
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private JLabel lblCursando;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField;
+    private javax.swing.JTextField n1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField n2;
+    private javax.swing.JTextField n3;
     private javax.swing.JTextField media;
-    private javax.swing.JTextField result;
-    // End of variables declaration//GEN-END:variables
 }
