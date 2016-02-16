@@ -83,6 +83,11 @@ public class ProfSelecionaAluno extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				lastWindow.setVisible(true);
 				setVisible(false);
+				try {
+					this.finalize();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -127,7 +132,17 @@ public class ProfSelecionaAluno extends JFrame {
 		String plhString = listaAlunos.getSelectedValue().toString();
 		String matricula = plhString.replaceAll(" .*", "");
 		Aluno aluno = ObjArrays.buscaAluno(matricula);
+		int disciplinaAConsultar = 0;
+		for(int i=0; i < 8; i++){
+			System.out.println(currentDisc.getCod());
+			if(aluno.getDisciplinasIntArray()[i] == currentDisc.getCod()){
+				disciplinaAConsultar = i;
+				System.out.println(disciplinaAConsultar+" ueh");
+				break;
+			}
+		}
 		NotasAluno notas = new NotasAluno(aluno);
+		notas.setDisciplinaConsultada(disciplinaAConsultar);
 		notas.setLastWindow(this);
 		notas.setVisible(true);
 		setVisible(false);

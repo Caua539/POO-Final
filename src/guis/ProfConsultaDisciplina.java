@@ -79,6 +79,11 @@ public class ProfConsultaDisciplina extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				inicial.setVisible(true);
 				setVisible(false);
+				try {
+					this.finalize();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		

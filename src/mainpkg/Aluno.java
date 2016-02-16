@@ -1,16 +1,31 @@
 package mainpkg;
 
+import java.text.DecimalFormat;
+
 public class Aluno extends Cadastrado {
 	
-	private int[] disciplinasCursando = {0, 0, 0, 0, 0, 0, 0, 0};
-	private double n1 = 0, n2=0, n3=0, media =0;
-	private boolean[] flagFirstTime = {false, false, false}; //Flag para saber se o aluno j� teve as notas alteradas antes
+	//private int[] disciplinasCursando = {0, 0, 0, 0, 0, 0, 0, 0};
+	private double[][] disciplinasENotas = new double[8][5]; //3 primeiras colunas são n1, n2, n3 e a última coluna é a media. Cada linha, uma disciplina;
+	private boolean[][] flagFirstTime = new boolean[8][3]; //Flag para saber se o aluno j� teve as notas alteradas antes
 	
-	public boolean getFlag(int i){
-		return this.flagFirstTime[i];
+	
+	public Aluno(){
+		for(int i=0; i < 8; i++){
+			for(int j=0; j < 5; j++){
+				disciplinasENotas[i][j] = 0.0;
+			}
+			for(int h=0; h< 3; h++){
+				flagFirstTime[i][h] = false;
+			}
+		}
 	}
-	public void setFlag(boolean flag, int i){
-		this.flagFirstTime[i] = flag;
+	
+	
+	public boolean getFlag(int d, int i){
+		return this.flagFirstTime[d][i];
+	}
+	public void setFlag(boolean flag, int d, int i){
+		this.flagFirstTime[d][i] = flag;
 	}
 
 	
@@ -30,29 +45,33 @@ public class Aluno extends Cadastrado {
 		return total;
 	}
 
-	public void setNotas(double a, double b, double c){
-		this.n1 = a;
-		this.n2 = b;
-		this.n3 = c;
-		this.media = doMedia(n1, n2, n3);
+	public void setNotas(double a, double b, double c, int d){
+		this.disciplinasENotas[d][1] = a;
+		this.disciplinasENotas[d][2] = b;
+		this.disciplinasENotas[d][3] = c;
+		this.disciplinasENotas[d][4] = doMedia(disciplinasENotas[d][0], disciplinasENotas[d][1], disciplinasENotas[d][2]);
 	}
 	
-	public double getN1(){
-		return this.n1;
+	public double getN1(int d){
+		return this.disciplinasENotas[d][1];
 	}
-	public double getN2(){
-		return this.n2;
+	public double getN2(int d){
+		return this.disciplinasENotas[d][2];
 	}
-	public double getN3(){
-		return this.n3;
+	public double getN3(int d){
+		return this.disciplinasENotas[d][3];
 	}
-	public double getMedia(){
-		return this.media;
+	public double getMedia(int d){
+		return this.disciplinasENotas[d][4];
 	}
 	
 	public String[] getDisciplinasCursando(){
+		int[] disciplinasCursando = new int[8];
+		for(int i=0; i < 8; i++){
+			disciplinasCursando[i] = (int) disciplinasENotas[i][0];
+		}
 		int tamString = 0;
-		for (int i = 0; i<5; i++){
+		for (int i = 0; i<8; i++){
 			if (disciplinasCursando[i] != 0){
 				tamString++;
 			}
@@ -66,12 +85,22 @@ public class Aluno extends Cadastrado {
 		}
 		return discNomes;
 	}
+	
+	public int[] getDisciplinasIntArray(){
+		int[] disciplinasCursando = new int[8];
+		for(int i=0; i < 8; i++){
+			disciplinasCursando[i] = (int) disciplinasENotas[i][0];
+		}
+		return disciplinasCursando;
+	}
 
 
 	public void setDisciplinasCursando(int disciplinasCursando[]) {
-		this.disciplinasCursando = disciplinasCursando;
+		for(int i = 0; i < 8; i++){
+			disciplinasENotas[i][0] = (double) disciplinasCursando[i];
+		}
 		for(int i = 0; i<8; i++){
-			System.out.println(this.disciplinasCursando[i]);
+			System.out.println(disciplinasENotas[i][0]);
 		}
 	}
 }

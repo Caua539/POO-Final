@@ -30,9 +30,14 @@ public class NotasAluno extends javax.swing.JFrame {
 	private static Aluno aluno;
 	private ProfSelecionaAluno lastWindow;
 	private double[] notas = {0, 0, 0};
+	private int d;
 	
 	public void setLastWindow(ProfSelecionaAluno window){
 		this.lastWindow = window;
+	}
+	
+	public void setDisciplinaConsultada(int disc){
+		this.d = disc;
 	}
     /**
      * Creates new form NotasAluno
@@ -41,27 +46,28 @@ public class NotasAluno extends javax.swing.JFrame {
     	this.aluno = aluno;
         initComponents();
         String nota = new String();
-        if(aluno.getFlag(0)){
-        	nota = String.valueOf(aluno.getN1());
+        if(aluno.getFlag(d,0)){
+        	nota = String.valueOf(aluno.getN1(d));
             n1.setText(nota);
             n1.setEditable(false);
             n1.setBackground(Color.LIGHT_GRAY);
         }
-        if (aluno.getFlag(1)){
-        	 nota = String.valueOf(aluno.getN2());
+        if (aluno.getFlag(d,1)){
+        	 nota = String.valueOf(aluno.getN2(d));
              n2.setText(nota);
              n2.setEditable(false);
              n2.setBackground(Color.LIGHT_GRAY);
         }
-        if (aluno.getFlag(2)){
-       	 	nota = String.valueOf(aluno.getN3());
+        if (aluno.getFlag(d,2)){
+       	 	nota = String.valueOf(aluno.getN3(d));
             n3.setText(nota);
             n3.setEditable(false);
             n3.setBackground(Color.LIGHT_GRAY);
        }
-        nota = String.valueOf(aluno.getMedia());
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
         media.setText(nota);
-        mudaStatusAluno(aluno.getMedia());
+        mudaStatusAluno(aluno.getMedia(d));
         
     }
 
@@ -166,12 +172,7 @@ public class NotasAluno extends javax.swing.JFrame {
         
         media.setBackground(new java.awt.Color(240, 240, 240));
         media.setEditable(false);
-        media.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        media.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mediaActionPerformed(evt);
-            }
-        });
+        media.setFont(new java.awt.Font("Tahoma", 0, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
@@ -196,6 +197,11 @@ public class NotasAluno extends javax.swing.JFrame {
         	public void actionPerformed(ActionEvent arg0) {
         		lastWindow.setVisible(true);
         		setVisible(false);
+        		try {
+					this.finalize();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
         	}
         });
         
@@ -342,6 +348,7 @@ public class NotasAluno extends javax.swing.JFrame {
     		n3.setText("");
     		return;
     	}
+    	
     	DecimalFormat numberFormat = new DecimalFormat("#.00");
     	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2]);
     	String mediaStr = String.valueOf(numberFormat.format(theMedia));
@@ -366,21 +373,17 @@ public class NotasAluno extends javax.swing.JFrame {
     
     private void bttnEnviarPerformed(){
     	if (!n1.getText().equals("")){
-    		aluno.setFlag(true, 0);
+    		aluno.setFlag(true, d, 0);
     	}
     	if (!n2.getText().equals("")){
-    		aluno.setFlag(true, 1);
+    		aluno.setFlag(true, d, 1);
     	}
     	if (!n3.getText().equals("")){
-    		aluno.setFlag(true, 2);
+    		aluno.setFlag(true, d, 2);
     	}
     	bttnConfirmarPerformed();
-    	aluno.setNotas(notas[0], notas[1], notas[2]);
+    	aluno.setNotas(notas[0], notas[1], notas[2], d);
     }
-
-    private void mediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediaActionPerformed
-        //consultaDisciplinas
-    }//GEN-LAST:event_mediaActionPerformed
 
     /**
      * @param args the command line arguments
