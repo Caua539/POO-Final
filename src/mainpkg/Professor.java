@@ -12,20 +12,15 @@ public class Professor extends Cadastrado {
 	}
 
 	public String[] getDisciplinasMinistradas(){
-		System.out.println("passei");
 		int tamString = 0;
 		for (int i = 0; i<5; i++){
 			if (disciplinasMinistradas[i] != 0){
-				System.out.println("entrei1");
 				tamString++;
 			}
 		}
-		System.out.println("passei 2");
 		String[] discNomes = new String[tamString];
 		for(int i=0; i < tamString; i++){
-			System.out.println("entrei");
 			if(ObjArrays.buscaDisciplina(disciplinasMinistradas[i])!= null){
-				System.out.println(disciplinasMinistradas[i]+"meeeh ");
 				discNomes[i] = ObjArrays.buscaDisciplina(disciplinasMinistradas[i]).getNome();
 				System.out.println(discNomes[i]);
 			}

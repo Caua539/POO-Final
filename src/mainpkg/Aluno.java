@@ -4,7 +4,7 @@ public class Aluno extends Cadastrado {
 	
 	private int[] disciplinasCursando = {0, 0, 0, 0, 0, 0, 0, 0};
 	private double n1 = 0, n2=0, n3=0, media =0;
-	private boolean[] flagFirstTime = {false, false, false}; //Flag para saber se o aluno já teve as notas alteradas antes
+	private boolean[] flagFirstTime = {false, false, false}; //Flag para saber se o aluno jï¿½ teve as notas alteradas antes
 	
 	public boolean getFlag(int i){
 		return this.flagFirstTime[i];
@@ -50,8 +50,21 @@ public class Aluno extends Cadastrado {
 		return this.media;
 	}
 	
-	public int[] getDisciplinasCursando() {
-		return disciplinasCursando;
+	public String[] getDisciplinasCursando(){
+		int tamString = 0;
+		for (int i = 0; i<5; i++){
+			if (disciplinasCursando[i] != 0){
+				tamString++;
+			}
+		}
+		String[] discNomes = new String[tamString];
+		for(int i=0; i < tamString; i++){
+			if(ObjArrays.buscaDisciplina(disciplinasCursando[i])!= null){
+				discNomes[i] = ObjArrays.buscaDisciplina(disciplinasCursando[i]).getNome();
+				System.out.println(discNomes[i]);
+			}
+		}
+		return discNomes;
 	}
 
 
