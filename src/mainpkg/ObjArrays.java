@@ -51,6 +51,13 @@ public class ObjArrays {
 		finalalun = i;
 	}
 	
+	public static String[] getDiscArray(){
+		return discArrayNome;
+	}
+	public static void setDiscArray(String [] discArray){
+		discArrayNome = discArray;
+	}
+	
 	//Métodos auxiliares para cadastro de professores novos (finalprof)
 	
 	public static Professor getProfessor(int num) {

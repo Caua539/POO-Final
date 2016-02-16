@@ -40,6 +40,29 @@ public class NotasAluno extends javax.swing.JFrame {
     public NotasAluno(Aluno aluno) {
     	this.aluno = aluno;
         initComponents();
+        String nota = new String();
+        if(aluno.getFlag(0)){
+        	nota = String.valueOf(aluno.getN1());
+            n1.setText(nota);
+            n1.setEditable(false);
+            n1.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(1)){
+        	 nota = String.valueOf(aluno.getN2());
+             n2.setText(nota);
+             n2.setEditable(false);
+             n2.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(2)){
+       	 	nota = String.valueOf(aluno.getN3());
+            n3.setText(nota);
+            n3.setEditable(false);
+            n3.setBackground(Color.LIGHT_GRAY);
+       }
+        nota = String.valueOf(aluno.getMedia());
+        media.setText(nota);
+        mudaStatusAluno(aluno.getMedia());
+        
     }
 
     /**
@@ -169,6 +192,12 @@ public class NotasAluno extends javax.swing.JFrame {
         lblCursando.setFont(new Font("Dialog", Font.BOLD, 20));
         
         JButton btnVoltar = new JButton("Voltar");
+        btnVoltar.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		lastWindow.setVisible(true);
+        		setVisible(false);
+        	}
+        });
         
         JButton btnAlterarNotas = new JButton("Alterar Notas");
         btnAlterarNotas.addActionListener(new ActionListener() {
@@ -274,6 +303,18 @@ public class NotasAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    private void mudaStatusAluno(double media){
+    	if (!n3.getText().equals("") & media >= 6.0){
+        	lblCursando.setText("Aprovado");
+        }
+        else if (!n3.getText().equals("") & media < 6.0){
+        	lblCursando.setText("Reprovado");
+        }
+        else if (n3.getText().equals("")){
+        	lblCursando.setText("Cursando");
+        }
+    }
+    
     private void bttnConfirmarPerformed(){
     	System.out.println(n3.getText());
     	if (!n1.getText().equals("")){
@@ -302,7 +343,7 @@ public class NotasAluno extends javax.swing.JFrame {
     		return;
     	}
     	DecimalFormat numberFormat = new DecimalFormat("#.00");
-    	double theMedia = aluno.getMedia(notas[0], notas[1], notas[2]);
+    	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2]);
     	String mediaStr = String.valueOf(numberFormat.format(theMedia));
     	media.setText(mediaStr);
         n1.setEditable(false);
@@ -311,17 +352,7 @@ public class NotasAluno extends javax.swing.JFrame {
         n2.setBackground(Color.LIGHT_GRAY);
         n3.setEditable(false);
         n3.setBackground(Color.LIGHT_GRAY);
-        
-        if (!n3.getText().equals("") & theMedia >= 6.0){
-        	lblCursando.setText("Aprovado");
-        }
-        else if (!n3.getText().equals("") & theMedia < 6.0){
-        	lblCursando.setText("Reprovado");
-        }
-        else if (n3.getText().equals("")){
-        	lblCursando.setText("Cursando");
-        }
-    	
+    	mudaStatusAluno(theMedia);
     }
     
     private void bttnAlterarPerformed(){
@@ -334,6 +365,15 @@ public class NotasAluno extends javax.swing.JFrame {
     }
     
     private void bttnEnviarPerformed(){
+    	if (!n1.getText().equals("")){
+    		aluno.setFlag(true, 0);
+    	}
+    	if (!n2.getText().equals("")){
+    		aluno.setFlag(true, 1);
+    	}
+    	if (!n3.getText().equals("")){
+    		aluno.setFlag(true, 2);
+    	}
     	bttnConfirmarPerformed();
     	aluno.setNotas(notas[0], notas[1], notas[2]);
     }
@@ -375,6 +415,8 @@ public class NotasAluno extends javax.swing.JFrame {
                 new NotasAluno(aluno).setVisible(true);
             }
         });
+        
+        
     }
     
     

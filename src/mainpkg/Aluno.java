@@ -4,6 +4,14 @@ public class Aluno extends Cadastrado {
 	
 	private int[] disciplinasCursando = {0, 0, 0, 0, 0, 0, 0, 0};
 	private double n1 = 0, n2=0, n3=0, media =0;
+	private boolean[] flagFirstTime = {false, false, false}; //Flag para saber se o aluno já teve as notas alteradas antes
+	
+	public boolean getFlag(int i){
+		return this.flagFirstTime[i];
+	}
+	public void setFlag(boolean flag, int i){
+		this.flagFirstTime[i] = flag;
+	}
 
 	
 	public void setMatricula(int matricula){
@@ -13,7 +21,7 @@ public class Aluno extends Cadastrado {
 		System.out.println(this.matricula);
 	}
 	
-	public double getMedia(double a, double b, double c){
+	public double doMedia(double a, double b, double c){
 		double d, e, f, total;
 		d = a*0.3;
 		e = b*0.3;
@@ -26,7 +34,20 @@ public class Aluno extends Cadastrado {
 		this.n1 = a;
 		this.n2 = b;
 		this.n3 = c;
-		this.media = getMedia(n1, n2, n3);
+		this.media = doMedia(n1, n2, n3);
+	}
+	
+	public double getN1(){
+		return this.n1;
+	}
+	public double getN2(){
+		return this.n2;
+	}
+	public double getN3(){
+		return this.n3;
+	}
+	public double getMedia(){
+		return this.media;
 	}
 	
 	public int[] getDisciplinasCursando() {

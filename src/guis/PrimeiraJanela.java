@@ -178,6 +178,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
 	    	oos.writeInt(ObjArrays.getFinalProf());
 	    	oos.writeInt(ObjArrays.getFinaldisc());
 	    	oos.writeInt(ObjArrays.getFinalAlun());
+	    	oos.writeObject(ObjArrays.getDiscArray());
 	    	oos.close();
 	    	System.out.println("DONE");
     	}
@@ -283,10 +284,12 @@ public class PrimeiraJanela extends javax.swing.JFrame {
 	    	//ObjArrays objeto = (ObjArrays) ois.readObject();
 	    	ObjArrays.setProfessoresArray((ArrayList<Professor>) ois.readObject());
 	    	ObjArrays.setDisciplinasArray((ArrayList<Disciplina>) ois.readObject());
+	    	System.out.println(ObjArrays.getDisciplinas().get(0).getNome());
 	    	ObjArrays.setAlunosArray((ArrayList<Aluno>) ois.readObject());
 	    	ObjArrays.setFinalProf(ois.readInt());
 	    	ObjArrays.setFinalDisc(ois.readInt());
 	    	ObjArrays.setFinalAlun(ois.readInt());
+	    	ObjArrays.setDiscArray((String[])ois.readObject());
 	    	ois.close();
 	    	System.out.println(ObjArrays.getProfessores().get(0).getMatricula());
     	}
