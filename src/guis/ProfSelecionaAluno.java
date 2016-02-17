@@ -141,8 +141,7 @@ public class ProfSelecionaAluno extends JFrame {
 				break;
 			}
 		}
-		NotasAluno notas = new NotasAluno(aluno);
-		notas.setDisciplinaConsultada(disciplinaAConsultar);
+		NotasAluno notas = new NotasAluno(aluno, disciplinaAConsultar);
 		notas.setLastWindow(this);
 		notas.setVisible(true);
 		setVisible(false);

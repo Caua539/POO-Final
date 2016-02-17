@@ -30,44 +30,20 @@ public class NotasAluno extends javax.swing.JFrame {
 	private static Aluno aluno;
 	private ProfSelecionaAluno lastWindow;
 	private double[] notas = {0, 0, 0};
-	private int d;
+	private static int d;
 	
 	public void setLastWindow(ProfSelecionaAluno window){
 		this.lastWindow = window;
 	}
 	
-	public void setDisciplinaConsultada(int disc){
-		this.d = disc;
-	}
     /**
      * Creates new form NotasAluno
      */
-    public NotasAluno(Aluno aluno) {
-    	this.aluno = aluno;
+    public NotasAluno(Aluno alunoConsultado, int disciplina) {
+    	aluno = alunoConsultado;
+    	d= disciplina;
         initComponents();
-        String nota = new String();
-        if(aluno.getFlag(d,0)){
-        	nota = String.valueOf(aluno.getN1(d));
-            n1.setText(nota);
-            n1.setEditable(false);
-            n1.setBackground(Color.LIGHT_GRAY);
-        }
-        if (aluno.getFlag(d,1)){
-        	 nota = String.valueOf(aluno.getN2(d));
-             n2.setText(nota);
-             n2.setEditable(false);
-             n2.setBackground(Color.LIGHT_GRAY);
-        }
-        if (aluno.getFlag(d,2)){
-       	 	nota = String.valueOf(aluno.getN3(d));
-            n3.setText(nota);
-            n3.setEditable(false);
-            n3.setBackground(Color.LIGHT_GRAY);
-       }
-        DecimalFormat numberFormat = new DecimalFormat("#.00");
-        nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
-        media.setText(nota);
-        mudaStatusAluno(aluno.getMedia(d));
+        recuperarNotasAluno();
         
     }
 
@@ -384,6 +360,34 @@ public class NotasAluno extends javax.swing.JFrame {
     	bttnConfirmarPerformed();
     	aluno.setNotas(notas[0], notas[1], notas[2], d);
     }
+    
+    private void recuperarNotasAluno(){
+    	String nota = new String();
+        if(aluno.getFlag(d,0)){
+        	System.out.println("Flag foi true");
+        	nota = String.valueOf(aluno.getN1(d));
+            n1.setText(nota);
+            n1.setEditable(false);
+            n1.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(d,1)){
+        	 System.out.println("Flag 2 foi true");
+        	 nota = String.valueOf(aluno.getN2(d));
+             n2.setText(nota);
+             n2.setEditable(false);
+             n2.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(d,2)){
+       	 	nota = String.valueOf(aluno.getN3(d));
+            n3.setText(nota);
+            n3.setEditable(false);
+            n3.setBackground(Color.LIGHT_GRAY);
+       }
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
+        media.setText(nota);
+        mudaStatusAluno(aluno.getMedia(d));
+    }
 
     /**
      * @param args the command line arguments
@@ -415,7 +419,7 @@ public class NotasAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NotasAluno(aluno).setVisible(true);
+                new NotasAluno(aluno, d).setVisible(true);
             }
         });
         
