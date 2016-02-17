@@ -18,14 +18,14 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ProfConsultaDisciplina extends JDialog {
+public class JanelaAlunoSelecDisciplina extends JDialog {
 
-	private static Professor professor;
+	private static Aluno aluno;
 	private PrimeiraJanela inicial;
 	private JComboBox disciplinas;
 	
-	public Professor getProfessor() {
-		return professor;
+	public Aluno getAluno() {
+		return aluno;
 	}
 	
 	public void setInicial(PrimeiraJanela inicio){
@@ -40,7 +40,7 @@ public class ProfConsultaDisciplina extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfConsultaDisciplina dialog = new ProfConsultaDisciplina(professor);
+					JanelaAlunoSelecDisciplina dialog = new JanelaAlunoSelecDisciplina(aluno);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -53,12 +53,12 @@ public class ProfConsultaDisciplina extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ProfConsultaDisciplina(Professor prof) {
-		professor = prof;
-		setBounds(100, 100, 371, 231);
+	public JanelaAlunoSelecDisciplina(Aluno alunoParam) {
+		aluno = alunoParam;
+		setBounds(100, 100, 443, 231);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(99, 130, 191)), "Disciplinas cadastradas", TitledBorder.LEADING, TitledBorder.TOP, new java.awt.Font("Sylfaen", 1, 24), null));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(99, 130, 191)), "Disciplinas matriculadas", TitledBorder.LEADING, TitledBorder.TOP, new java.awt.Font("Sylfaen", 1, 24), null));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -79,20 +79,13 @@ public class ProfConsultaDisciplina extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				inicial.setVisible(true);
 				setVisible(false);
-				try {
-					this.finalize();
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
 			}
 		});
 		
-		JLabel lblEscolhaUmaDisciplina = new JLabel("Escolha uma disciplina para consultar");
-		
-		JLabel lblOsAlunosCadastrados = new JLabel("os alunos e gerenciar suas notas");
+		JLabel lblEscolhaUmaDisciplina = new JLabel("Escolha uma disciplina para consultar suas notas");
 		
 		disciplinas = new JComboBox();
-		disciplinas.setModel(new DefaultComboBoxModel(professor.getDisciplinasMinistradas()));
+		disciplinas.setModel(new DefaultComboBoxModel(aluno.getDisciplinasCursando()));
 		
 		JButton btnNewButton = new JButton("Continuar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -103,37 +96,31 @@ public class ProfConsultaDisciplina extends JDialog {
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
+							.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
 							.addComponent(lblEscolhaUmaDisciplina))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblOsAlunosCadastrados, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnSair)
+							.addPreferredGap(ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+							.addComponent(btnNewButton)))
 					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addContainerGap(71, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGap(92)
 					.addComponent(disciplinas, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)
-					.addGap(58))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnSair)
-					.addPreferredGap(ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addContainerGap())
+					.addContainerGap(109, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblEscolhaUmaDisciplina)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblOsAlunosCadastrados)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(24)
 					.addComponent(disciplinas, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnSair, Alignment.TRAILING)
 						.addComponent(btnNewButton, Alignment.TRAILING))
@@ -146,9 +133,7 @@ public class ProfConsultaDisciplina extends JDialog {
 	
 	public void bttnContinuarPerformed(){
 		ProfSelecionaAluno listaaluno = new ProfSelecionaAluno(ObjArrays.buscaDisciplina(professor.getSingleDisciplinaMinistrada(disciplinas.getSelectedIndex())));
-		listaaluno.setLastWindow(this);
-		listaaluno.setVisible(true);
-		setVisible(false);
+		
 	}
 	
 }

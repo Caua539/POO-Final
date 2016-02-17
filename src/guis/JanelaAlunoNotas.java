@@ -24,26 +24,54 @@ import java.awt.event.ActionEvent;
  *
  * @author Ana Luísa
  */
-public class NotasAluno extends javax.swing.JFrame {
+public class JanelaAlunoNotas extends javax.swing.JFrame {
 
 	
 	private static Aluno aluno;
 	private ProfSelecionaAluno lastWindow;
 	private double[] notas = {0, 0, 0};
-	private static int d;
 	
 	public void setLastWindow(ProfSelecionaAluno window){
 		this.lastWindow = window;
 	}
-	
     /**
      * Creates new form NotasAluno
      */
-    public NotasAluno(Aluno alunoConsultado, int disciplina) {
-    	aluno = alunoConsultado;
-    	d= disciplina;
+    public JanelaAlunoNotas(Aluno aluno) {
+    	this.aluno = aluno;
         initComponents();
-        recuperarNotasAluno();
+        String nota = new String();
+        if(aluno.getFlag(0)){
+        	nota = String.valueOf(aluno.getN1());
+            n1.setText(nota);
+            n1.setEditable(false);
+            n1.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(1)){
+        	 nota = String.valueOf(aluno.getN2());
+             n2.setText(nota);
+             n2.setEditable(false);
+             n2.setBackground(Color.LIGHT_GRAY);
+        }
+        if (aluno.getFlag(2)){
+       	 	nota = String.valueOf(aluno.getN3());
+            n3.setText(nota);
+            n3.setEditable(false);
+            n3.setBackground(Color.LIGHT_GRAY);
+       }
+        nota = String.valueOf(aluno.getMedia());
+        media.setText(nota);
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE)
+        );
+        getContentPane().setLayout(groupLayout);
+        mudaStatusAluno(aluno.getMedia());
         
     }
 
@@ -68,8 +96,11 @@ public class NotasAluno extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         n1 = new javax.swing.JTextField();
+        n1.setEditable(false);
         n2 = new javax.swing.JTextField();
+        n2.setEditable(false);
         n3 = new javax.swing.JTextField();
+        n3.setEditable(false);
         media = new javax.swing.JTextField();
         
 
@@ -100,70 +131,19 @@ public class NotasAluno extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Média:");
 
-        n1.setBackground(Color.WHITE);
+        n1.setBackground(Color.LIGHT_GRAY);
         n1.setFont(new java.awt.Font("Tahoma", 0, 12));
-        n1.addFocusListener(new FocusAdapter() {
-        	@Override
-        	public void focusLost(FocusEvent e) {
-        		try {
-        		  double usrInput= Double.parseDouble(n1.getText());
-        		}
-        		catch(NumberFormatException exception) {
-        		  System.out.println("This is not a double");
-        		  n1.setText("");
-        		}
-        	}
-        });
 
-        n2.setBackground(Color.WHITE);
+        n2.setBackground(Color.LIGHT_GRAY);
         n2.setFont(new java.awt.Font("Tahoma", 0, 12));
-        n2.addFocusListener(new FocusAdapter() {
-        	@Override
-        	public void focusLost(FocusEvent e) {
-        		try {
-          		  double usrInput= Double.parseDouble(n2.getText());
-          		}
-          		catch(NumberFormatException exception) {
-          		  System.out.println("This is not a double");
-          		  n2.setText("");
-          		}
-        	}
-        });
 
-        n3.setBackground(Color.WHITE);
-        n3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        n3.addFocusListener(new FocusAdapter() {
-        	@Override
-        	public void focusLost(FocusEvent e) {
-        		try {
-          		  double usrInput= Double.parseDouble(n3.getText());
-          		}
-          		catch(NumberFormatException exception) {
-          		  System.out.println("This is not a double");
-          		  n3.setText("");
-          		}
-        	}
-        });
+        n3.setBackground(Color.LIGHT_GRAY);
+        n3.setFont(new java.awt.Font("Tahoma", 0, 12));
         
         
         media.setBackground(new java.awt.Color(240, 240, 240));
         media.setEditable(false);
         media.setFont(new java.awt.Font("Tahoma", 0, 12));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 304, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        getContentPane().setLayout(layout);
         
         lblCursando.setText("Cursando");
         lblCursando.setFont(new Font("Dialog", Font.BOLD, 20));
@@ -173,72 +153,38 @@ public class NotasAluno extends javax.swing.JFrame {
         	public void actionPerformed(ActionEvent arg0) {
         		lastWindow.setVisible(true);
         		setVisible(false);
-        		try {
-					this.finalize();
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
-        	}
-        });
-        
-        JButton btnAlterarNotas = new JButton("Alterar Notas");
-        btnAlterarNotas.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		bttnAlterarPerformed();
-        	}
-        });
-        
-        JButton btnNewButton = new JButton("Enviar Notas");
-        btnNewButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		bttnEnviarPerformed();
-        	}
-        });
-        
-        JButton btnVerMdia = new JButton("Confirmar Notas");
-        btnVerMdia.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		bttnConfirmarPerformed();
         	}
         });
         GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
         gl_jPanel1.setHorizontalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        	gl_jPanel1.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel12)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(81)
-        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING, false)
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel4)
-        							.addGap(26)
-        							.addComponent(n1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel6)
-        							.addGap(26)
-        							.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel11)
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))))
+        					.addComponent(jLabel12)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(81)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING, false)
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addComponent(btnVoltar)
-        					.addGap(29)
-        					.addComponent(btnAlterarNotas)
-        					.addGap(18)
-        					.addComponent(btnNewButton)))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        		.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        			.addContainerGap(253, Short.MAX_VALUE)
-        			.addComponent(btnVerMdia)
-        			.addContainerGap())
+        					.addComponent(jLabel4)
+        					.addGap(26)
+        					.addComponent(n1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel6)
+        					.addGap(26)
+        					.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel11)
+        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(27, Short.MAX_VALUE))
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addContainerGap(173, Short.MAX_VALUE)
+        			.addComponent(btnVoltar)
+        			.addGap(164))
         );
         gl_jPanel1.setVerticalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
@@ -272,13 +218,8 @@ public class NotasAluno extends javax.swing.JFrame {
         						.addComponent(jLabel12)
         						.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
         			.addGap(59)
-        			.addComponent(btnVerMdia)
-        			.addGap(18)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(btnVoltar)
-        				.addComponent(btnAlterarNotas)
-        				.addComponent(btnNewButton))
-        			.addContainerGap())
+        			.addComponent(btnVoltar)
+        			.addGap(77))
         );
         jPanel1.setLayout(gl_jPanel1);
 
@@ -324,7 +265,6 @@ public class NotasAluno extends javax.swing.JFrame {
     		n3.setText("");
     		return;
     	}
-    	
     	DecimalFormat numberFormat = new DecimalFormat("#.00");
     	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2]);
     	String mediaStr = String.valueOf(numberFormat.format(theMedia));
@@ -336,57 +276,6 @@ public class NotasAluno extends javax.swing.JFrame {
         n3.setEditable(false);
         n3.setBackground(Color.LIGHT_GRAY);
     	mudaStatusAluno(theMedia);
-    }
-    
-    private void bttnAlterarPerformed(){
-    	n1.setEditable(true);
-        n1.setBackground(Color.WHITE);
-        n2.setEditable(true);
-        n2.setBackground(Color.WHITE);
-        n3.setEditable(true);
-        n3.setBackground(Color.WHITE);
-    }
-    
-    private void bttnEnviarPerformed(){
-    	if (!n1.getText().equals("")){
-    		aluno.setFlag(true, d, 0);
-    	}
-    	if (!n2.getText().equals("")){
-    		aluno.setFlag(true, d, 1);
-    	}
-    	if (!n3.getText().equals("")){
-    		aluno.setFlag(true, d, 2);
-    	}
-    	bttnConfirmarPerformed();
-    	aluno.setNotas(notas[0], notas[1], notas[2], d);
-    }
-    
-    private void recuperarNotasAluno(){
-    	String nota = new String();
-        if(aluno.getFlag(d,0)){
-        	System.out.println("Flag foi true");
-        	nota = String.valueOf(aluno.getN1(d));
-            n1.setText(nota);
-            n1.setEditable(false);
-            n1.setBackground(Color.LIGHT_GRAY);
-        }
-        if (aluno.getFlag(d,1)){
-        	 System.out.println("Flag 2 foi true");
-        	 nota = String.valueOf(aluno.getN2(d));
-             n2.setText(nota);
-             n2.setEditable(false);
-             n2.setBackground(Color.LIGHT_GRAY);
-        }
-        if (aluno.getFlag(d,2)){
-       	 	nota = String.valueOf(aluno.getN3(d));
-            n3.setText(nota);
-            n3.setEditable(false);
-            n3.setBackground(Color.LIGHT_GRAY);
-       }
-        DecimalFormat numberFormat = new DecimalFormat("#.00");
-        nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
-        media.setText(nota);
-        mudaStatusAluno(aluno.getMedia(d));
     }
 
     /**
@@ -406,20 +295,20 @@ public class NotasAluno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NotasAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaAlunoNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NotasAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaAlunoNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NotasAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaAlunoNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NotasAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaAlunoNotas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NotasAluno(aluno, d).setVisible(true);
+                new JanelaAlunoNotas(aluno).setVisible(true);
             }
         });
         
