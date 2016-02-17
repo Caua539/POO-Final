@@ -49,7 +49,7 @@ public class Aluno extends Cadastrado {
 		this.disciplinasENotas[d][1] = a;
 		this.disciplinasENotas[d][2] = b;
 		this.disciplinasENotas[d][3] = c;
-		this.disciplinasENotas[d][4] = doMedia(disciplinasENotas[d][0], disciplinasENotas[d][1], disciplinasENotas[d][2]);
+		this.disciplinasENotas[d][4] = doMedia(disciplinasENotas[d][1], disciplinasENotas[d][2], disciplinasENotas[d][3]);
 	}
 	
 	public double getN1(int d){
@@ -84,6 +84,10 @@ public class Aluno extends Cadastrado {
 			}
 		}
 		return discNomes;
+	}
+	
+	public int getSingleDisciplinaCursando(int i){
+		return (int)disciplinasENotas[i][0];
 	}
 	
 	public int[] getDisciplinasIntArray(){

@@ -134,10 +134,8 @@ public class ProfSelecionaAluno extends JFrame {
 		Aluno aluno = ObjArrays.buscaAluno(matricula);
 		int disciplinaAConsultar = 0;
 		for(int i=0; i < 8; i++){
-			System.out.println(currentDisc.getCod());
 			if(aluno.getDisciplinasIntArray()[i] == currentDisc.getCod()){
 				disciplinaAConsultar = i;
-				System.out.println(disciplinaAConsultar+" ueh");
 				break;
 			}
 		}

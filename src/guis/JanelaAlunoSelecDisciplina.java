@@ -132,7 +132,10 @@ public class JanelaAlunoSelecDisciplina extends JDialog {
 	}
 	
 	public void bttnContinuarPerformed(){
-		ProfSelecionaAluno listaaluno = new ProfSelecionaAluno(ObjArrays.buscaDisciplina(professor.getSingleDisciplinaMinistrada(disciplinas.getSelectedIndex())));
+		JanelaAlunoNotas mynotas = new JanelaAlunoNotas(aluno, disciplinas.getSelectedIndex());
+		mynotas.setLastWindow(this);
+		mynotas.setVisible(true);
+		setVisible(false);
 		
 	}
 	

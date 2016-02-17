@@ -364,14 +364,12 @@ public class NotasAluno extends javax.swing.JFrame {
     private void recuperarNotasAluno(){
     	String nota = new String();
         if(aluno.getFlag(d,0)){
-        	System.out.println("Flag foi true");
         	nota = String.valueOf(aluno.getN1(d));
             n1.setText(nota);
             n1.setEditable(false);
             n1.setBackground(Color.LIGHT_GRAY);
         }
         if (aluno.getFlag(d,1)){
-        	 System.out.println("Flag 2 foi true");
         	 nota = String.valueOf(aluno.getN2(d));
              n2.setText(nota);
              n2.setEditable(false);

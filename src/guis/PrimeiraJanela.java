@@ -19,6 +19,13 @@ import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPasswordField;
+import java.awt.Font;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  *
@@ -45,10 +52,19 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
+        matricula.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusGained(FocusEvent arg0) {
+        		senhaIncorreta.setText("");
+        	}
+        });
         jLabel2 = new javax.swing.JLabel();
+        jLabel2.setFont(new Font("Tahoma", Font.PLAIN, 12));
         jLabel3 = new javax.swing.JLabel();
+        jLabel3.setFont(new Font("Tahoma", Font.PLAIN, 12));
         bttnEntrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel4.setFont(new Font("Tahoma", Font.BOLD, 14));
         bttnCadastre = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
 
@@ -94,74 +110,114 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         });
         
         senha = new JPasswordField();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1Layout.setHorizontalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addComponent(bttnCadastre)
-        			.addPreferredGap(ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-        			.addComponent(bttnSair)
-        			.addContainerGap())
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
+        senha.setHorizontalAlignment(SwingConstants.CENTER);
+        senha.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusGained(FocusEvent e) {
+        		senhaIncorreta.setText("");
+        	}
+        });
+        
+        JSeparator separator = new JSeparator();
+        separator.setOrientation(SwingConstants.VERTICAL);
+        
+        JLabel lblEntreComSuas = new JLabel();
+        lblEntreComSuas.setText("Entre com suas credenciais");
+        lblEntreComSuas.setFont(new Font("Tahoma", Font.BOLD, 14));
+        
+        senhaIncorreta = new JLabel("");
+        senhaIncorreta.setForeground(Color.RED);
+        GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
+        gl_jPanel1.setHorizontalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addGap(283)
         					.addComponent(jLabel1))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(103)
-        					.addComponent(bttnEntrar))
-        				.addComponent(jLabel4)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(79)
-        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
-        						.addComponent(senha, Alignment.LEADING)
-        						.addComponent(matricula, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
-        			.addGap(0, 0, Short.MAX_VALUE))
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(107)
-        			.addComponent(jLabel2)
-        			.addContainerGap(110, Short.MAX_VALUE))
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGap(114)
-        			.addComponent(jLabel3)
-        			.addContainerGap(124, Short.MAX_VALUE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addContainerGap(54, Short.MAX_VALUE)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel4)
+        							.addGap(41))
+        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        							.addComponent(bttnCadastre, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+        							.addGap(55)))
+        					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING, false)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(50)
+        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(senha, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(75)
+        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(senhaIncorreta)
+        								.addComponent(bttnEntrar)))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(18)
+        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        								.addComponent(bttnSair)
+        								.addComponent(lblEntreComSuas)))
+        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+        							.addGap(55))
+        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+        							.addGap(66)))))
+        			.addGap(210))
         );
-        jPanel1Layout.setVerticalGroup(
-        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addComponent(jLabel1)
-        			.addGap(28)
-        			.addComponent(jLabel2)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(matricula, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addGap(19)
-        			.addComponent(jLabel3)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(senha, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(bttnEntrar, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(jLabel4)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(bttnCadastre)
-        				.addComponent(bttnSair))
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        gl_jPanel1.setVerticalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGap(11)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addComponent(separator, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel1)
+        							.addGap(19)
+        							.addComponent(lblEntreComSuas, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGap(19)
+        							.addComponent(jLabel4)))
+        					.addGap(18)
+        					.addComponent(jLabel2)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(jLabel3)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(senha, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(bttnEntrar, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(bttnCadastre, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(senhaIncorreta)))
+        			.addGap(29))
+        		.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        			.addContainerGap(249, Short.MAX_VALUE)
+        			.addComponent(bttnSair)
+        			.addContainerGap())
         );
-        jPanel1.setLayout(jPanel1Layout);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1.setLayout(gl_jPanel1);
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 431, GroupLayout.PREFERRED_SIZE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         );
+        getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,16 +251,20 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     	if (matricula.getText().length() == 8){
     		Professor prof = validaCadastroProf(matricula.getText(), strSenha);
     		if (prof != null) {
-    			ProfConsultaDisciplina disc = new ProfConsultaDisciplina(prof);
-    			disc.setInicial(this);
-    			disc.setVisible(true);
+    			ProfConsultaDisciplina janelanovaprof = new ProfConsultaDisciplina(prof);
+    			janelanovaprof.setInicial(this);
+    			janelanovaprof.setVisible(true);
+    			senha.setText("");
     			setVisible(false);
     		}
     	}
     	else if (matricula.getText().length() == 10){
-    		if (validaCadastroAluno(matricula.getText(), strSenha) != null) {
-    			EmConstrucao emcons = new EmConstrucao();
-    			emcons.setVisible(true);
+    		Aluno aluno = validaCadastroAluno(matricula.getText(), strSenha);
+    		if (aluno != null) {
+    			JanelaAlunoSelecDisciplina janelanova = new JanelaAlunoSelecDisciplina(aluno);
+    			janelanova.setInicial(this);
+    			janelanova.setVisible(true);
+    			senha.setText("");
     			setVisible(false);
     		}
     	}
@@ -313,6 +373,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField matricula;
     private JPasswordField senha;
+    private JLabel senhaIncorreta;
     // End of variables declaration//GEN-END:variables
 
 
@@ -322,9 +383,15 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         	if (senha.equals(prof.getSenha())){
         		return prof;
         	}
-        	else return null;
+        	else {
+        		senhaIncorreta.setText("Senha Incorreta!");
+        		return null;
+        	}
         }
-        else return null;
+        else {
+        	senhaIncorreta.setText("Matrícula inexistente!");
+        	return null;
+        }
 
     }
     
@@ -334,9 +401,15 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         	if (senha.equals(aluno.getSenha())){
         		return aluno;
         	}
-        	else return null;
+        	else {
+        		senhaIncorreta.setText("Senha Incorreta!");
+        		return null;
+        	}
         }
-        else return null;
+        else {
+        	senhaIncorreta.setText("Matrícula inexistente!");
+        	return null;
+        }
 
     }
 }

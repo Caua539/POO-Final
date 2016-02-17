@@ -32,7 +32,8 @@ import java.awt.event.FocusEvent;
 public class Cadastro extends javax.swing.JFrame {
 	
 	private PrimeiraJanela inicial;
-	private boolean senhasconferem = true;
+	private boolean senhasconferem = false;
+	private boolean nomeconferido = false;
 	
 	public void setInicial(PrimeiraJanela inicial){
 		this.inicial = inicial;
@@ -63,7 +64,6 @@ public class Cadastro extends javax.swing.JFrame {
         matricula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         confirmaSenha = new javax.swing.JPasswordField();
         bttnContinuar = new javax.swing.JButton();
@@ -82,6 +82,19 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2.setText("Nome:");
 
         nome.setFont(new java.awt.Font("Tahoma", 0, 14));
+        nome.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		if(nome.getText().equals("")){
+        			nomeconferido = false;
+        			confereNome.setText("Insira um nome");
+        		}
+        		else{
+        			nomeconferido = true;
+        			confereNome.setText("");
+        		}
+        	}
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Matr\u00EDcula");
@@ -96,8 +109,17 @@ public class Cadastro extends javax.swing.JFrame {
 
         senha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         senha.setToolTipText("");
-
-        jLabel6.setText("*6 a 8 d\u00EDgitos");
+        senha.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		String senhaStr = new String(senha.getPassword());
+        		if(senhaStr.equals("")){
+        			senhasconferem = false;
+        			confereSenha.setText("Insira uma senha");
+        		}
+        		else confereSenha.setText("");
+        	}
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Digite novamente:");
@@ -137,19 +159,12 @@ public class Cadastro extends javax.swing.JFrame {
         
         
         confirmpasswrong.setForeground(Color.RED);
-        GroupLayout groupLayout = new GroupLayout(getContentPane());
-        groupLayout.setHorizontalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        groupLayout.setVerticalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(groupLayout.createSequentialGroup()
-        			.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        
+        confereNome = new JLabel();
+        confereNome.setForeground(Color.RED);
+        
+        confereSenha = new JLabel();
+        confereSenha.setForeground(Color.RED);
         GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
         gl_jPanel1.setHorizontalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
@@ -163,23 +178,28 @@ public class Cadastro extends javax.swing.JFrame {
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addComponent(jLabel2)
         					.addGap(12)
-        					.addComponent(nome, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(nome, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addComponent(confereNome, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addComponent(jLabel4)
         					.addGap(12)
         					.addComponent(senha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-        					.addGap(12)
-        					.addComponent(jLabel6))
+        					.addGap(18)
+        					.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addComponent(jLabel7)
         					.addGap(12)
         					.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
         					.addGap(12)
-        					.addComponent(confirmpasswrong, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addComponent(bttnSair)
-        					.addGap(297)
-        					.addComponent(bttnContinuar))))
+        					.addComponent(confirmpasswrong, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(67))
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGap(10)
+        			.addComponent(bttnSair)
+        			.addPreferredGap(ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
+        			.addComponent(bttnContinuar)
+        			.addGap(38))
         );
         gl_jPanel1.setVerticalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
@@ -195,16 +215,17 @@ public class Cadastro extends javax.swing.JFrame {
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addGap(2)
         					.addComponent(jLabel2))
-        				.addComponent(nome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(nome, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(4)
+        					.addComponent(confereNome, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)))
         			.addGap(18)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addGap(2)
         					.addComponent(jLabel4))
         				.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(3)
-        					.addComponent(jLabel6)))
+        				.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
         			.addGap(18)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
@@ -212,19 +233,28 @@ public class Cadastro extends javax.swing.JFrame {
         					.addComponent(jLabel7))
         				.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(confirmpasswrong))
-        			.addGap(18)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        			.addGap(31)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
         				.addComponent(bttnSair)
         				.addComponent(bttnContinuar)))
         );
         jPanel1.setLayout(gl_jPanel1);
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+        );
         getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnContinuarActionPerformed
-        if(senhasconferem == true){
+        if(senhasconferem & nomeconferido){
         	String strSenha = new String(senha.getPassword());
         	ObjArrays.setDadosProfessores(nome.getText(),strSenha);
         	DisciplinasProfessor disprof = new DisciplinasProfessor();
@@ -290,7 +320,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -298,6 +327,8 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JPasswordField senha;
     private JLabel confirmpasswrong;
+    private JLabel confereNome;
+    private JLabel confereSenha;
     // End of variables declaration//GEN-END:variables
 
     private void cadastraDados() {
