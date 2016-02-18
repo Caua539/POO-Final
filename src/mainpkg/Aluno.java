@@ -4,14 +4,16 @@ import java.text.DecimalFormat;
 
 public class Aluno extends Cadastrado {
 	
-	//private int[] disciplinasCursando = {0, 0, 0, 0, 0, 0, 0, 0};
-	private double[][] disciplinasENotas = new double[8][5]; //3 primeiras colunas são n1, n2, n3 e a última coluna é a media. Cada linha, uma disciplina;
-	private boolean[][] flagFirstTime = new boolean[8][3]; //Flag para saber se o aluno j� teve as notas alteradas antes
+	private int size = ObjArrays.getFinaldisc();
+	private double[][] disciplinasENotas = new double[size][4]; //3 primeiras colunas são n1, n2, n3 e a última coluna é a media. Cada linha, uma disciplina;
+	private boolean[][] flagFirstTime = new boolean[size][3]; //Flag para saber se o aluno j� teve as notas alteradas antes
 	
 	
 	public Aluno(){
-		for(int i=0; i < 8; i++){
-			for(int j=0; j < 5; j++){
+		
+		
+		for(int i=0; i < size; i++){
+			for(int j=0; j < 4; j++){
 				disciplinasENotas[i][j] = 0.0;
 			}
 			for(int h=0; h< 3; h++){
@@ -49,7 +51,7 @@ public class Aluno extends Cadastrado {
 		this.disciplinasENotas[d][1] = a;
 		this.disciplinasENotas[d][2] = b;
 		this.disciplinasENotas[d][3] = c;
-		this.disciplinasENotas[d][4] = doMedia(disciplinasENotas[d][1], disciplinasENotas[d][2], disciplinasENotas[d][3]);
+		this.disciplinasENotas[d][0] = doMedia(disciplinasENotas[d][1], disciplinasENotas[d][2], disciplinasENotas[d][3]);
 	}
 	
 	public double getN1(int d){
@@ -62,22 +64,12 @@ public class Aluno extends Cadastrado {
 		return this.disciplinasENotas[d][3];
 	}
 	public double getMedia(int d){
-		return this.disciplinasENotas[d][4];
+		return this.disciplinasENotas[d][0];
 	}
 	
-	public String[] getDisciplinasCursando(){
-		int[] disciplinasCursando = new int[8];
-		for(int i=0; i < 8; i++){
-			disciplinasCursando[i] = (int) disciplinasENotas[i][0];
-		}
-		int tamString = 0;
-		for (int i = 0; i<8; i++){
-			if (disciplinasCursando[i] != 0){
-				tamString++;
-			}
-		}
-		String[] discNomes = new String[tamString];
-		for(int i=0; i < tamString; i++){
+	/*public String[] getDisciplinasCursando(){
+		String[] discNomes = new String[size];
+		for(int i=0; i < size; i++){
 			if(ObjArrays.buscaDisciplina(disciplinasCursando[i])!= null){
 				discNomes[i] = ObjArrays.buscaDisciplina(disciplinasCursando[i]).getNome();
 				System.out.println(discNomes[i]);
@@ -87,7 +79,7 @@ public class Aluno extends Cadastrado {
 	}
 	
 	public int getSingleDisciplinaCursando(int i){
-		return (int)disciplinasENotas[i][0];
+		return disciplinasCursando[i];
 	}
 	
 	public int[] getDisciplinasIntArray(){
@@ -99,12 +91,7 @@ public class Aluno extends Cadastrado {
 	}
 
 
-	public void setDisciplinasCursando(int disciplinasCursando[]) {
-		for(int i = 0; i < 8; i++){
-			disciplinasENotas[i][0] = (double) disciplinasCursando[i];
-		}
-		for(int i = 0; i<8; i++){
-			System.out.println(disciplinasENotas[i][0]);
-		}
-	}
+	public void setDisciplinasCursando(int disciplina, int i) {
+		this.disciplinasCursando[i] = disciplina;
+	}*/
 }

@@ -14,7 +14,7 @@ public class ObjArrays {
 	private static int finalalun = 0;
 	private static int finaldisc = 0;
 	
-	private static int[] vetorCodigos = {0, 0, 0, 0, 0, 0, 0, 0};
+	private static int[] vetorCodigos = new int[3];
 	
 	//MÉTODOS PARA ESCREVER E LER DADOS DO ARQUIVO
 	public static ArrayList<Professor> getProfessores(){
@@ -73,9 +73,10 @@ public class ObjArrays {
 		professores.get(finalprof).setMatricula(finalprof);
 	}
 	
-	public static void setDadosProfessores(String nome, String senha){
+	public static void setDadosProfessores(String nome, String senha, String area){
 		professores.get(finalprof).setNome(nome);
 		professores.get(finalprof).setSenha(senha);
+		professores.get(finalprof).setAreaDeConhecimento(area);
 		System.out.println(professores.get(finalprof).getNome());
 	}
 	
@@ -84,11 +85,11 @@ public class ObjArrays {
 	}
 	
 	public static void adicionarProfDisciplina(int num){
-		disciplinas.get(num-1).addProfessor(professores.get(finalprof).getMatricula());
+		disciplinas.get(num).addProfessor(professores.get(finalprof).getMatricula());
 		int cont = 0;
-		while(cont < 5){
+		while(cont < 3){
 			if (vetorCodigos[cont] == 0){ 
-				vetorCodigos[cont] = num;
+				vetorCodigos[cont] = num+1;
 				break;
 			}
 			else cont++;
@@ -102,10 +103,10 @@ public class ObjArrays {
 	}
 	
 	public static void terminaProfCadastro(){
-		int[] vetorplh = {0, 0, 0, 0, 0};
-		for (int i = 0; i < 5; i++) vetorplh[i] = vetorCodigos[i];
+		int[] vetorplh = {0, 0, 0};
+		for (int i = 0; i < 3; i++) vetorplh[i] = vetorCodigos[i];
 		professores.get(finalprof).setdisciplinasMinistradas(vetorplh);
-		for(int i = 0; i< 8; i++) vetorCodigos[i] = 0;
+		for(int i = 0; i< 3; i++) vetorCodigos[i] = 0;
 		finalprof++;
 	}
 
@@ -154,10 +155,8 @@ public class ObjArrays {
 	
 	public static String[] getArrayDisciplinas(){
 		String[] retornoNome = new String[finaldisc];
-		int j = 0;
 		for(int i = 0; i<finaldisc;i++){
-			retornoNome[j] = discArrayNome[i];
-			j++;
+			retornoNome[i] = discArrayNome[i];
 		}
 		return retornoNome;
 	}
@@ -171,6 +170,36 @@ public class ObjArrays {
 		return null;
 	}
 	
+	public static String[] buscaDisciplinaByArea(String area){
+		int contador = 0;
+		
+		for(int i = 0; i < finaldisc; i++){
+			if(disciplinas.get(i).getModalidade().equals(Disciplina.limparString(area))){
+				if(disciplinas.get(i).checaSlotProf()){
+					System.out.println(disciplinas.get(i).getNome());
+					contador++;
+				}
+			}
+		}
+		System.out.println(contador);
+		String[] stringArea = new String[contador];
+		int j = 0;
+		
+		for(int i = 0; i < finaldisc; i++){
+			if(disciplinas.get(i).getModalidade().equals(Disciplina.limparString(area))){
+				if(disciplinas.get(i).checaSlotProf()){
+					System.out.println(disciplinas.get(i).getNome()+"  2� for");
+					stringArea[j] = disciplinas.get(i).getNome();
+					j++;
+					
+				}
+			}
+		}
+		
+		
+		return stringArea;
+	}
+	
 	
 	//Métodos auxiliares para cadastro de novos alunos
 	
@@ -181,7 +210,6 @@ public class ObjArrays {
 	}
 	
 	public static void criarAlunos(Aluno aluno) {
-		//alunos[finalalun] = new Aluno();
 		alunos.add(aluno);
 		alunos.get(finalalun).setMatricula(finalalun);
 	}
@@ -198,29 +226,9 @@ public class ObjArrays {
 		return alunos.get(i).getMatricula();
 	}
 	
-	public static void adicionarAlunDisciplina(String discNome){
-		int cont = 0;
-		int cod = 0;
-		for(int i = 0; i < finaldisc; i++){
-			if(disciplinas.get(i).getNome().equals(Disciplina.limparString(discNome))){
-				cod = disciplinas.get(i).getCod();
-				disciplinas.get(i).addAluno(alunos.get(finalalun).getMatricula());
-				while(cont < 8){
-					if (vetorCodigos[cont] == 0){ 
-						vetorCodigos[cont] = cod;
-						break;
-					}
-					else cont++;
-				}
-				break;
-			}
-		}
-	}
+
 	
 	public static void terminaAlunCadastro(){
-		
-		alunos.get(finalalun).setDisciplinasCursando(vetorCodigos);
-		for(int i = 0; i< 8; i++) vetorCodigos[i] = 0;
 		finalalun++;
 	}
 	
@@ -262,5 +270,6 @@ public class ObjArrays {
 		}
 		return null;
 	}
+	
 
 }

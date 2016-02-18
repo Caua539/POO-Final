@@ -382,19 +382,28 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     		ex.printStackTrace();
     	}
         
-        if (ObjArrays.getFinaldisc() < 11){
-        	ObjArrays.setDisciplinas("Língua Portuguesa I", "Humanas");
-            ObjArrays.setDisciplinas("Geografia Fisica I", "Humanas");
-            ObjArrays.setDisciplinas("História do Brasil I", "Humanas");
-            ObjArrays.setDisciplinas("Filosofia I", "Humanas");
-            ObjArrays.setDisciplinas("Sociologia I", "Humanas");
-            ObjArrays.setDisciplinas("Língua Inglesa I", "Humanas");
-            ObjArrays.setDisciplinas("Matemática Básica I", "Exatas");
-            ObjArrays.setDisciplinas("Física Elétrica I", "Exatas");
-            ObjArrays.setDisciplinas("Química Orgânica I", "Exatas");
-            ObjArrays.setDisciplinas("Ecologia I", "Biológicas");
-            ObjArrays.setDisciplinas("Genética I", "Biológicas");
-            ObjArrays.setDisciplinas("Bioquímica I", "Biológicas");
+        if (ObjArrays.getFinaldisc() < 21){
+        	ObjArrays.setDisciplinas("Língua Portuguesa", "Humanas");
+            ObjArrays.setDisciplinas("Geografia Fisica", "Humanas");
+            ObjArrays.setDisciplinas("Geografia Política", "Humanas");
+            ObjArrays.setDisciplinas("História Antiga", "Humanas");
+            ObjArrays.setDisciplinas("História Moderna", "Humanas");
+            ObjArrays.setDisciplinas("História do Brasil", "Humanas");
+            ObjArrays.setDisciplinas("Filosofia", "Humanas");
+            ObjArrays.setDisciplinas("Sociologia", "Humanas");
+            ObjArrays.setDisciplinas("Língua Inglesa", "Humanas");
+            ObjArrays.setDisciplinas("Matemática: Geometria", "Exatas");
+            ObjArrays.setDisciplinas("Matemática: Trigonometria", "Exatas");
+            ObjArrays.setDisciplinas("Matemática Básica", "Exatas");
+            ObjArrays.setDisciplinas("Física Mecânica", "Exatas");
+            ObjArrays.setDisciplinas("Física Térmica", "Exatas");
+            ObjArrays.setDisciplinas("Física Óptica", "Exatas");
+            ObjArrays.setDisciplinas("Física Elétrica", "Exatas");
+            ObjArrays.setDisciplinas("Química", "Exatas");
+            ObjArrays.setDisciplinas("Química Orgânica", "Exatas");
+            ObjArrays.setDisciplinas("Ecologia", "Biológicas");
+            ObjArrays.setDisciplinas("Genética", "Biológicas");
+            ObjArrays.setDisciplinas("Bioquímica", "Biológicas");
         }
         
         

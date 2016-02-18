@@ -94,7 +94,7 @@ public class CadastroAlun extends javax.swing.JFrame {
         confereSenha.setForeground(Color.RED);
         jLabel7 = new javax.swing.JLabel();
         confirmaSenha = new javax.swing.JPasswordField();
-        bttnContinuar = new javax.swing.JButton();
+        bttnConcluir = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
         confirmpasswrong = new JLabel();
 
@@ -147,9 +147,9 @@ public class CadastroAlun extends javax.swing.JFrame {
         
         confirmpasswrong.setForeground(Color.RED);
 
-        bttnContinuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        bttnContinuar.setText("Continuar");
-        bttnContinuar.addActionListener(new java.awt.event.ActionListener() {
+        bttnConcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        bttnConcluir.setText("Concluir");
+        bttnConcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bttnContinuarActionPerformed(evt);
             }
@@ -201,7 +201,7 @@ public class CadastroAlun extends javax.swing.JFrame {
         				.addGroup(gl_jPanel1.createSequentialGroup()
         					.addComponent(bttnSair)
         					.addPreferredGap(ComponentPlacement.RELATED, 511, Short.MAX_VALUE)
-        					.addComponent(bttnContinuar))))
+        					.addComponent(bttnConcluir))))
         );
         gl_jPanel1.setVerticalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
@@ -241,7 +241,7 @@ public class CadastroAlun extends javax.swing.JFrame {
         			.addGap(28)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addComponent(bttnSair)
-        				.addComponent(bttnContinuar))
+        				.addComponent(bttnConcluir))
         			.addGap(36))
         );
         jPanel1.setLayout(gl_jPanel1);
@@ -263,9 +263,8 @@ public class CadastroAlun extends javax.swing.JFrame {
     	if(senhasconferem & nomeconferido){
         	String strSenha = new String(senha.getPassword());
         	ObjArrays.setDadosAlunos(nome.getText(),strSenha);
-        	DisciplinasAluno disalun = new DisciplinasAluno();
-        	disalun.setCastro(this);
-        	disalun.setVisible(true);
+        	ObjArrays.terminaAlunCadastro();
+        	inicial.setVisible(true);
         	setVisible(false);
     	}
     	
@@ -315,7 +314,7 @@ public class CadastroAlun extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnContinuar;
+    private javax.swing.JButton bttnConcluir;
     private javax.swing.JButton bttnSair;
     private javax.swing.JPasswordField confirmaSenha;
     private javax.swing.JButton jButton1;

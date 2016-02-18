@@ -24,6 +24,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -34,9 +37,14 @@ public class Cadastro extends javax.swing.JFrame {
 	private PrimeiraJanela inicial;
 	private boolean senhasconferem = false;
 	private boolean nomeconferido = false;
+	private boolean areaconferida = false;
 	
 	public void setInicial(PrimeiraJanela inicial){
 		this.inicial = inicial;
+	}
+	
+	public PrimeiraJanela getInicial(){
+		return inicial;
 	}
 
     /**
@@ -165,41 +173,78 @@ public class Cadastro extends javax.swing.JFrame {
         
         confereSenha = new JLabel();
         confereSenha.setForeground(Color.RED);
+        
+        JLabel lblreaDeConhecimento = new JLabel("\u00C1rea de Conhecimento:");
+        lblreaDeConhecimento.setFont(new Font("Tahoma", Font.BOLD, 14));
+        
+        areaBox = new JComboBox();
+        areaBox.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent arg0) {
+        		if (areaBox.getSelectedItem().toString().equals("")){
+        			areaBox.setBackground(Color.RED);
+        			areaconferida = false;
+        		}
+        		else {
+        			areaBox.setBackground(Color.WHITE);
+        			areaconferida = true;
+        		}
+        	}
+        });
+        areaBox.setFont(new Font("Tahoma", Font.BOLD, 12));
+        areaBox.setBackground(Color.WHITE);
+        areaBox.setModel(new DefaultComboBoxModel(new String[] {"", "Humanas", "Exatas", "Biol\u00F3gicas"}));
+        
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+        );
         GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
         gl_jPanel1.setHorizontalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(12)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(12)
         					.addComponent(jLabel3)
         					.addGap(12)
         					.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(12)
         					.addComponent(jLabel2)
         					.addGap(12)
         					.addComponent(nome, GroupLayout.PREFERRED_SIZE, 439, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
         					.addComponent(confereNome, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(12)
         					.addComponent(jLabel4)
         					.addGap(12)
         					.addComponent(senha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
-        					.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+        					.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(lblreaDeConhecimento)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(areaBox, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
         				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(12)
         					.addComponent(jLabel7)
         					.addGap(12)
         					.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
         					.addGap(12)
-        					.addComponent(confirmpasswrong, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(67))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(10)
-        			.addComponent(bttnSair)
-        			.addPreferredGap(ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
-        			.addComponent(bttnContinuar)
-        			.addGap(38))
+        					.addComponent(confirmpasswrong, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(10)
+        					.addComponent(bttnSair)
+        					.addGap(494)
+        					.addComponent(bttnContinuar)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         gl_jPanel1.setVerticalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
@@ -220,12 +265,16 @@ public class Cadastro extends javax.swing.JFrame {
         					.addGap(4)
         					.addComponent(confereNome, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)))
         			.addGap(18)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(2)
-        					.addComponent(jLabel4))
-        				.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        					.addGroup(gl_jPanel1.createSequentialGroup()
+        						.addGap(2)
+        						.addComponent(jLabel4))
+        					.addComponent(senha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addComponent(confereSenha, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(lblreaDeConhecimento)
+        					.addComponent(areaBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         			.addGap(18)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
@@ -234,30 +283,22 @@ public class Cadastro extends javax.swing.JFrame {
         				.addComponent(confirmaSenha, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(confirmpasswrong))
         			.addGap(31)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addComponent(bttnSair)
         				.addComponent(bttnContinuar)))
         );
         jPanel1.setLayout(gl_jPanel1);
-        GroupLayout groupLayout = new GroupLayout(getContentPane());
-        groupLayout.setHorizontalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 674, GroupLayout.PREFERRED_SIZE)
-        );
-        groupLayout.setVerticalGroup(
-        	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-        );
         getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bttnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnContinuarActionPerformed
-        if(senhasconferem & nomeconferido){
+        if(senhasconferem & nomeconferido & areaconferida){
         	String strSenha = new String(senha.getPassword());
-        	ObjArrays.setDadosProfessores(nome.getText(),strSenha);
-        	DisciplinasProfessor disprof = new DisciplinasProfessor();
+        	String strArea = new String(areaBox.getSelectedItem().toString());
+        	ObjArrays.setDadosProfessores(nome.getText(),strSenha, strArea);
+        	JanelaProfCadastraDisciplina disprof = new JanelaProfCadastraDisciplina (strArea);
         	disprof.setCastro(this);
         	disprof.setVisible(true);
         	setVisible(false);
@@ -329,6 +370,7 @@ public class Cadastro extends javax.swing.JFrame {
     private JLabel confirmpasswrong;
     private JLabel confereNome;
     private JLabel confereSenha;
+    private JComboBox areaBox;
     // End of variables declaration//GEN-END:variables
 
     private void cadastraDados() {

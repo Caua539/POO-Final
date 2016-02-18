@@ -2,7 +2,8 @@ package mainpkg;
 
 public class Professor extends Cadastrado {
 	
-	private int disciplinasMinistradas[] = {0, 0, 0, 0, 0};
+	private int disciplinasMinistradas[] = {0, 0, 0};
+	private String areaDeConhecimento = null;
 
 	
 	public void setMatricula(int matricula){
@@ -34,9 +35,17 @@ public class Professor extends Cadastrado {
 
 	public void setdisciplinasMinistradas(int disciplinasMinistradas[]) {
 		this.disciplinasMinistradas = disciplinasMinistradas;
-		for(int i = 0; i<5; i++){
+		for(int i = 0; i<3; i++){
 			System.out.println(this.disciplinasMinistradas[i]+" why");
 		}
+	}
+
+	public String getAreaDeConhecimento() {
+		return areaDeConhecimento;
+	}
+
+	public void setAreaDeConhecimento(String areaDeConhecimento) {
+		this.areaDeConhecimento = areaDeConhecimento;
 	}
 	
 	
