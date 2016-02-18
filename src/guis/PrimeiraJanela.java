@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPasswordField;
@@ -24,14 +25,25 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 /**
  *
- * @authors Ana LuÃ­sa e Paula
+ * @authors Cauã, Ana Luísa e Paula
  */
 public class PrimeiraJanela extends javax.swing.JFrame {
+	
+	private PrimeiraJanela inicial = this;
 
     /**
      * Creates new form PrimeiraJanela
@@ -50,14 +62,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
-        matricula.addFocusListener(new FocusAdapter() {
-        	@Override
-        	public void focusGained(FocusEvent arg0) {
-        		senhaIncorreta.setText("");
-        	}
-        });
         jLabel2 = new javax.swing.JLabel();
         jLabel2.setFont(new Font("Tahoma", Font.PLAIN, 12));
         jLabel3 = new javax.swing.JLabel();
@@ -65,19 +70,25 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         bttnEntrar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel4.setFont(new Font("Tahoma", Font.BOLD, 14));
-        bttnCadastre = new javax.swing.JButton();
         bttnSair = new javax.swing.JButton();
+        btnSouProfessor = new javax.swing.JButton();
+        btnSouAluno = new javax.swing.JButton();
+        senhaIncorreta = new javax.swing.JLabel();
 
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bem Vindo!", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24))); // NOI18N
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bem Vindo!", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24)));
 
         matricula.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         matricula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         matricula.setName("");
+        matricula.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusGained(FocusEvent arg0) {
+        		senhaIncorreta.setText("");
+        	}
+        });
 
         jLabel2.setText("Matr\u00EDcula");
 
@@ -92,14 +103,6 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         });
 
         jLabel4.setText("N\u00E3o possui cadastro?");
-
-        bttnCadastre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        bttnCadastre.setText("Cadastre-se");
-        bttnCadastre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttnCadastreActionPerformed(evt);
-            }
-        });
 
         bttnSair.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         bttnSair.setText("Sair");
@@ -125,85 +128,113 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         lblEntreComSuas.setText("Entre com suas credenciais");
         lblEntreComSuas.setFont(new Font("Tahoma", Font.BOLD, 14));
         
-        senhaIncorreta = new JLabel("");
+        senhaIncorreta.setText("");
         senhaIncorreta.setForeground(Color.RED);
+        
+        btnSouProfessor= new JButton("Sou Professor");
+        btnSouProfessor.setFont(new Font("Tahoma", Font.BOLD, 13));
+        btnSouProfessor.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		Professor novoprof = new Professor();
+				ObjArrays.criarProfessores(novoprof);
+				Cadastro cadastroprof = new Cadastro();
+				cadastroprof.setInicial(inicial);
+				cadastroprof.setVisible(true);
+				setVisible(false);
+        	}
+        });
+        
+        btnSouAluno = new JButton("Sou Aluno");
+        btnSouAluno.setFont(new Font("Tahoma", Font.BOLD, 13));
+        btnSouAluno.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		Aluno novoalun = new Aluno();
+				ObjArrays.criarAlunos(novoalun);
+				CadastroAlun cadastroalun = new CadastroAlun();
+				cadastroalun.setInicial(inicial);
+		    	cadastroalun.setVisible(true);
+		    	setVisible(false);
+        	}
+        });
+        
+        
         GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
         gl_jPanel1.setHorizontalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(283)
-        					.addComponent(jLabel1))
+        					.addGap(26)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(btnSouProfessor, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(btnSouAluno, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)))
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addContainerGap(54, Short.MAX_VALUE)
+        					.addGap(15)
+        					.addComponent(jLabel4)))
+        			.addGap(32)
+        			.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel4)
-        							.addGap(41))
-        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        							.addComponent(bttnCadastre, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-        							.addGap(55)))
-        					.addComponent(separator, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING, false)
+        						.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        							.addGroup(gl_jPanel1.createSequentialGroup()
+        								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        								.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING, false)
+        									.addComponent(bttnSair)
+        									.addComponent(lblEntreComSuas))
+        								.addGap(210))
+        							.addGroup(gl_jPanel1.createSequentialGroup()
+        								.addGap(36)
+        								.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        									.addComponent(senha, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+        									.addComponent(senhaIncorreta, Alignment.LEADING))
+        								.addContainerGap()))
         						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addGap(50)
-        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        								.addComponent(senha, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(matricula, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)))
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addGap(75)
-        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        								.addComponent(senhaIncorreta)
-        								.addComponent(bttnEntrar)))
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addGap(18)
-        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
-        								.addComponent(bttnSair)
-        								.addComponent(lblEntreComSuas)))
-        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-        							.addGap(55))
-        						.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        							.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-        							.addGap(66)))))
-        			.addGap(210))
+        							.addGap(60)
+        							.addComponent(bttnEntrar)
+        							.addContainerGap()))
+        					.addGroup(gl_jPanel1.createSequentialGroup()
+        						.addGap(77)
+        						.addComponent(jLabel3, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+        						.addContainerGap()))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(71)
+        					.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())))
         );
         gl_jPanel1.setVerticalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        	gl_jPanel1.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(11)
+        			.addContainerGap(11, Short.MAX_VALUE)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addComponent(separator, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addComponent(jLabel1)
-        							.addGap(19)
-        							.addComponent(lblEntreComSuas, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(gl_jPanel1.createSequentialGroup()
-        							.addGap(19)
-        							.addComponent(jLabel4)))
+        					.addGap(19)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(lblEntreComSuas, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jLabel4))
         					.addGap(18)
-        					.addComponent(jLabel2)
-        					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jLabel2)
+        							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addGap(11)
         							.addComponent(jLabel3)
         							.addPreferredGap(ComponentPlacement.RELATED)
         							.addComponent(senha, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(bttnEntrar, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
-        						.addComponent(bttnCadastre, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(senhaIncorreta)))
-        			.addGap(29))
-        		.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
-        			.addContainerGap(249, Short.MAX_VALUE)
+        							.addComponent(bttnEntrar, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(senhaIncorreta))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(btnSouProfessor, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+        							.addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+        							.addComponent(btnSouAluno, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+        							.addGap(35)))))
+        			.addGap(17)
         			.addComponent(bttnSair)
         			.addContainerGap())
         );
@@ -211,13 +242,24 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 431, GroupLayout.PREFERRED_SIZE)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 423, GroupLayout.PREFERRED_SIZE)
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         );
         getContentPane().setLayout(groupLayout);
+        
+        Vector<Component> order = new Vector<Component>(7);
+        order.add(matricula);
+        order.add(senha);
+        order.add(bttnEntrar);
+        order.add(btnSouProfessor);
+        order.add(btnSouAluno);
+        order.add(bttnSair);
+        ConfigFocusOrder newPolicy = new ConfigFocusOrder(order);
+        this.setFocusTraversalPolicy(newPolicy);
+        
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,6 +289,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
 
     private void bttnEntrarActionPerformed(java.awt.event.ActionEvent evt) {
     	//GEN-FIRST:event_bttnEntrarActionPerformed
+    	
     	String strSenha = new String(senha.getPassword());
     	if (matricula.getText().length() == 8){
     		Professor prof = validaCadastroProf(matricula.getText(), strSenha);
@@ -268,16 +311,9 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     			setVisible(false);
     		}
     	}
+    	else senhaIncorreta.setText("Matrícula inexistente!");
     	
     }//GEN-LAST:event_bttnEntrarActionPerformed
-
-    private void bttnCadastreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnCadastreActionPerformed
-       //chama a proxima janela
-        AlunoOrProf alunoorprof = new AlunoOrProf();
-        alunoorprof.setIniciar(this);
-        alunoorprof.setVisible(true);
-        setVisible(false);
-    }//GEN-LAST:event_bttnCadastreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,14 +395,10 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         
         
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bttnCadastre;
     private javax.swing.JButton bttnEntrar;
     private javax.swing.JButton bttnSair;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private JButton btnSouProfessor;
+    private JButton btnSouAluno;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -412,4 +444,40 @@ public class PrimeiraJanela extends javax.swing.JFrame {
         }
 
     }
+	
+	public static class ConfigFocusOrder extends FocusTraversalPolicy {
+		Vector<Component> order;
+		
+		public ConfigFocusOrder(Vector<Component> order) {
+			this.order = new Vector<Component>(order.size());
+			this.order.addAll(order);
+		}
+		
+		public Component getComponentAfter(Container focusCycleRoot, Component aComponent) {
+			int idx = (order.indexOf(aComponent) + 1) % order.size();
+			return order.get(idx);
+		}
+		
+		public Component getComponentBefore(Container focusCycleRoot, Component aComponent) {
+			int idx = order.indexOf(aComponent) - 1;
+			if (idx < 0) {
+				idx = order.size() - 1;
+			}
+			return order.get(idx);
+		}
+		
+		public Component getDefaultComponent(Container focusCycleRoot) {
+			return order.get(0);
+		}
+		
+		public Component getLastComponent(Container focusCycleRoot) {
+			return order.lastElement();
+		}
+		
+		public Component getFirstComponent(Container focusCycleRoot) {
+			return order.get(0);
+		}
+	}
 }
+
+
