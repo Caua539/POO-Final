@@ -19,6 +19,7 @@ import java.util.InputMismatchException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 /**
  *
@@ -29,7 +30,7 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
 	
 	private static Aluno aluno;
 	private JanelaAlunoSelecDisciplina lastWindow;
-	private double[] notas = {0, 0, 0};
+	private double[] notas = {0, 0, 0, 0};
 	private static int d;  //variável para amazenar a posição da disciplina na matriz do aluno
 	
 	public void setLastWindow(JanelaAlunoSelecDisciplina window){
@@ -93,13 +94,13 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Notas de "+aluno.getNome(), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 20)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("N1:");
+        jLabel4.setText("1\u00BA Bimestre:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("N2:");
+        jLabel6.setText("2\u00BA Bimestre:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("N3:");
+        jLabel11.setText("3\u00BA Bimestre:");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("MÃ©dia:");
@@ -112,6 +113,12 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
 
         n3.setBackground(Color.LIGHT_GRAY);
         n3.setFont(new java.awt.Font("Tahoma", 0, 12));
+        
+        n4 = new JTextField();
+        n4.setBackground(Color.LIGHT_GRAY);
+        n4.setEditable(false);
+        n4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        
         
         
         media.setBackground(new java.awt.Color(240, 240, 240));
@@ -129,94 +136,114 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
         	}
         });
         
+        JLabel lblBimestre = new JLabel();
+        lblBimestre.setText("4\u00BA Bimestre:");
+        lblBimestre.setFont(new Font("Tahoma", Font.BOLD, 12));
+        
+        
+        
+        GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
+        gl_jPanel1.setHorizontalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(10)
+        					.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(lblBimestre, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+        							.addGap(18)
+        							.addComponent(n4))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel4)
+        							.addGap(18)
+        							.addComponent(n1))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(jLabel6)
+        								.addComponent(jLabel11))
+        							.addGap(18)
+        							.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        								.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(jLabel12)
+        					.addGap(18)
+        					.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(164)
+        					.addComponent(btnVoltar)))
+        			.addContainerGap(27, Short.MAX_VALUE))
+        );
+        gl_jPanel1.setVerticalGroup(
+        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_jPanel1.createSequentialGroup()
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(24)
+        					.addComponent(lblCursando))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel4)
+        						.addComponent(n1, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel6)
+        						.addComponent(n2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        			.addGap(17)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel11)
+        				.addComponent(n3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(50)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel12)
+        						.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(18)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblBimestre)
+        						.addComponent(n4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        			.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+        			.addComponent(btnVoltar)
+        			.addContainerGap())
+        );
+        jPanel1.setLayout(gl_jPanel1);
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
-        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 405, GroupLayout.PREFERRED_SIZE)
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
         		.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE)
         );
-        GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
-        gl_jPanel1.setHorizontalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(10)
-        			.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-        			.addGap(81)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addComponent(jLabel4)
-        				.addComponent(jLabel6))
-        			.addGap(26)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addComponent(n1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(10)
-        			.addComponent(jLabel12)
-        			.addGap(10)
-        			.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-        			.addGap(126)
-        			.addComponent(jLabel11)
-        			.addGap(26)
-        			.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(164)
-        			.addComponent(btnVoltar))
-        );
-        gl_jPanel1.setVerticalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(12)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(12)
-        					.addComponent(lblCursando))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(2)
-        					.addComponent(jLabel4)
-        					.addGap(18)
-        					.addComponent(jLabel6))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addComponent(n1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        					.addGap(12)
-        					.addComponent(n2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(11)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(21)
-        					.addComponent(jLabel12))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(20)
-        					.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(3)
-        					.addComponent(jLabel11))
-        				.addComponent(n3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(60)
-        			.addComponent(btnVoltar))
-        );
-        jPanel1.setLayout(gl_jPanel1);
         getContentPane().setLayout(groupLayout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     private void mudaStatusAluno(double media){
-    	if (!n3.getText().equals("") & media >= 6.0){
+    	if (!n4.getText().equals("") & media >= 6.0){
         	lblCursando.setText("Aprovado");
         }
-        else if (!n3.getText().equals("") & media < 6.0){
+        else if (!n4.getText().equals("") & media < 6.0){
         	lblCursando.setText("Reprovado");
         }
-        else if (n3.getText().equals("")){
+        else if (n4.getText().equals("")){
         	lblCursando.setText("Cursando");
         }
+    	
     }
     
     private void bttnConfirmarPerformed(){
-    	System.out.println(n3.getText());
+    	System.out.println(n4.getText());
     	if (!n1.getText().equals("")){
     		notas[0] = Double.parseDouble(n1.getText());
     	}
@@ -229,6 +256,10 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
     		notas[2] = Double.parseDouble(n3.getText());
     	}
     	else notas[2] = 0.0;
+    	if (!n4.getText().equals("")){
+    		notas[3] = Double.parseDouble(n4.getText());
+    	}
+    	else notas[3] = 0.0;
     	
     	if (notas[0] > 10.0 | notas[0] < 0.0){
     		n1.setText("");
@@ -242,8 +273,12 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
     		n3.setText("");
     		return;
     	}
+    	else if (notas[3] > 10.0 | notas[3] < 0.0){
+    		n4.setText("");
+    		return;
+    	}
     	DecimalFormat numberFormat = new DecimalFormat("#.00");
-    	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2]);
+    	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2], notas[3]);
     	String mediaStr = String.valueOf(numberFormat.format(theMedia));
     	media.setText(mediaStr);
         n1.setEditable(false);
@@ -252,6 +287,8 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
         n2.setBackground(Color.LIGHT_GRAY);
         n3.setEditable(false);
         n3.setBackground(Color.LIGHT_GRAY);
+        n4.setEditable(false);
+        n4.setBackground(Color.LIGHT_GRAY);
     	mudaStatusAluno(theMedia);
     }
     
@@ -274,6 +311,12 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
             n3.setText(nota);
             n3.setEditable(false);
             n3.setBackground(Color.LIGHT_GRAY);
+       }
+        if (aluno.getFlag(d,3)){
+       	 	nota = String.valueOf(aluno.getN4(d));
+            n4.setText(nota);
+            n4.setEditable(false);
+            n4.setBackground(Color.LIGHT_GRAY);
        }
         DecimalFormat numberFormat = new DecimalFormat("#.00");
         nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
@@ -335,4 +378,5 @@ public class JanelaAlunoNotas extends javax.swing.JFrame {
     private javax.swing.JTextField n3;
     private javax.swing.JTextField media;
     private JButton btnVoltar;
+    private JTextField n4;
 }

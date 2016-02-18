@@ -30,7 +30,7 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
 	
 	private static Aluno aluno;
 	private ProfSelecionaAluno lastWindow;
-	private double[] notas = {0, 0, 0};
+	private double[] notas = {0, 0, 0, 0};
 	private static int d;
 	
 	public void setLastWindow(ProfSelecionaAluno window){
@@ -100,6 +100,10 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Média:");
+        
+        JLabel lblBimestre = new JLabel();
+        lblBimestre.setText("4\u00BA Bimestre:");
+        lblBimestre.setFont(new Font("Tahoma", Font.BOLD, 12));
 
         n1.setBackground(Color.WHITE);
         n1.setFont(new java.awt.Font("Tahoma", 0, 12));
@@ -145,7 +149,21 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
           		}
         	}
         });
-        
+        n4 = new JTextField();
+        n4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        n4.setBackground(Color.WHITE);
+        n4.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		try {
+          		  double usrInput= Double.parseDouble(n4.getText());
+          		}
+          		catch(NumberFormatException exception) {
+          		  System.out.println("This is not a double");
+          		  n4.setText("");
+          		}
+        	}
+        });
         
         media.setBackground(new java.awt.Color(240, 240, 240));
         media.setEditable(false);
@@ -188,13 +206,6 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
         	}
         });
         
-        n4 = new JTextField();
-        n4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        n4.setBackground(Color.WHITE);
-        
-        JLabel lblBimestre = new JLabel();
-        lblBimestre.setText("4\u00BA Bimestre:");
-        lblBimestre.setFont(new Font("Tahoma", Font.BOLD, 12));
         GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -208,88 +219,94 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
         );
         GroupLayout gl_jPanel1 = new GroupLayout(jPanel1);
         gl_jPanel1.setHorizontalGroup(
-        	gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        	gl_jPanel1.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(6)
-        			.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-        			.addGap(18)
-        			.addComponent(jLabel4)
-        			.addGap(56)
-        			.addComponent(n1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(204)
-        			.addComponent(jLabel6)
-        			.addGap(56)
-        			.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(6)
-        			.addComponent(jLabel12)
-        			.addGap(12)
-        			.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-        			.addGap(61)
-        			.addComponent(jLabel11)
-        			.addGap(56)
-        			.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(204)
-        			.addComponent(lblBimestre)
-        			.addGap(56)
-        			.addComponent(n4, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-        		.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
         			.addComponent(btnVoltar)
-        			.addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
         			.addComponent(btnAlterarNotas)
-        			.addGap(18)
-        			.addComponent(btnNewButton))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(btnNewButton)
+        			.addGap(100))
         		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(133)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblCursando, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addGap(6)
+        					.addComponent(jLabel12)
+        					.addGap(12)
+        					.addComponent(media, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(18)
+        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(Alignment.TRAILING, gl_jPanel1.createSequentialGroup()
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(lblBimestre)
+        							.addGap(18)
+        							.addComponent(n4, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel6)
+        							.addGap(18)
+        							.addComponent(n2, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel11)
+        							.addGap(18)
+        							.addComponent(n3, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(136))
+        				.addGroup(gl_jPanel1.createSequentialGroup()
+        					.addComponent(jLabel4)
+        					.addGap(18)
+        					.addComponent(n1, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())))
+        		.addGroup(Alignment.LEADING, gl_jPanel1.createSequentialGroup()
+        			.addGap(132)
         			.addComponent(btnVerMdia)
-        			.addContainerGap(148, Short.MAX_VALUE))
+        			.addContainerGap(241, Short.MAX_VALUE))
         );
         gl_jPanel1.setVerticalGroup(
         	gl_jPanel1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_jPanel1.createSequentialGroup()
-        			.addGap(12)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(12)
-        					.addComponent(lblCursando))
-        				.addComponent(jLabel4)
+        					.addGap(15)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel4)
+        						.addComponent(n1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(9)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jLabel6)
+        						.addComponent(n2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(2)
-        					.addComponent(n1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(3)
+        					.addGap(23)
+        					.addComponent(lblCursando)))
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        					.addGroup(gl_jPanel1.createSequentialGroup()
+        						.addGap(24)
+        						.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
+        							.addGroup(gl_jPanel1.createSequentialGroup()
+        								.addGap(17)
+        								.addComponent(jLabel12))
+        							.addGroup(gl_jPanel1.createSequentialGroup()
+        								.addGap(13)
+        								.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        					.addGroup(gl_jPanel1.createSequentialGroup()
+        						.addGap(6)
+        						.addComponent(n3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(6)
-        					.addComponent(jLabel6))
-        				.addComponent(n2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(18)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(17)
-        					.addComponent(jLabel12))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(13)
-        					.addComponent(media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(6)
-        					.addComponent(jLabel11))
-        				.addComponent(n3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(1)
-        			.addGroup(gl_jPanel1.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_jPanel1.createSequentialGroup()
-        					.addGap(6)
-        					.addComponent(lblBimestre))
-        				.addComponent(n4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+        					.addGap(18)
+        					.addGroup(gl_jPanel1.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(n4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(gl_jPanel1.createSequentialGroup()
+        							.addComponent(jLabel11)
+        							.addGap(18)
+        							.addComponent(lblBimestre)))))
+        			.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
         			.addComponent(btnVerMdia)
-        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(gl_jPanel1.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(btnAlterarNotas)
         				.addComponent(btnNewButton)
-        				.addComponent(btnVoltar)
-        				.addComponent(btnAlterarNotas))
-        			.addContainerGap())
+        				.addComponent(btnVoltar)))
         );
         jPanel1.setLayout(gl_jPanel1);
         getContentPane().setLayout(groupLayout);
@@ -298,19 +315,19 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void mudaStatusAluno(double media){
-    	if (!n3.getText().equals("") & media >= 6.0){
+    	if (!n4.getText().equals("") & media >= 6.0){
         	lblCursando.setText("Aprovado");
         }
-        else if (!n3.getText().equals("") & media < 6.0){
+        else if (!n4.getText().equals("") & media < 6.0){
         	lblCursando.setText("Reprovado");
         }
-        else if (n3.getText().equals("")){
+        else if (n4.getText().equals("")){
         	lblCursando.setText("Cursando");
         }
     }
     
     private void bttnConfirmarPerformed(){
-    	System.out.println(n3.getText());
+    	System.out.println(n4.getText());
     	if (!n1.getText().equals("")){
     		notas[0] = Double.parseDouble(n1.getText());
     	}
@@ -323,6 +340,10 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
     		notas[2] = Double.parseDouble(n3.getText());
     	}
     	else notas[2] = 0.0;
+    	if (!n4.getText().equals("")){
+    		notas[3] = Double.parseDouble(n4.getText());
+    	}
+    	else notas[3] = 0.0;
     	
     	if (notas[0] > 10.0 | notas[0] < 0.0){
     		n1.setText("");
@@ -336,9 +357,13 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
     		n3.setText("");
     		return;
     	}
+    	else if (notas[3] > 10.0 | notas[3] < 0.0){
+    		n4.setText("");
+    		return;
+    	}
     	
     	DecimalFormat numberFormat = new DecimalFormat("#.00");
-    	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2]);
+    	double theMedia = aluno.doMedia(notas[0], notas[1], notas[2], notas[3]);
     	String mediaStr = String.valueOf(numberFormat.format(theMedia));
     	media.setText(mediaStr);
         n1.setEditable(false);
@@ -347,6 +372,8 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
         n2.setBackground(Color.LIGHT_GRAY);
         n3.setEditable(false);
         n3.setBackground(Color.LIGHT_GRAY);
+        n4.setEditable(false);
+        n4.setBackground(Color.LIGHT_GRAY);
     	mudaStatusAluno(theMedia);
     }
     
@@ -357,6 +384,8 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
         n2.setBackground(Color.WHITE);
         n3.setEditable(true);
         n3.setBackground(Color.WHITE);
+        n4.setEditable(true);
+        n4.setBackground(Color.WHITE);
     }
     
     private void bttnEnviarPerformed(){
@@ -369,8 +398,11 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
     	if (!n3.getText().equals("")){
     		aluno.setFlag(true, d, 2);
     	}
+    	if (!n4.getText().equals("")){
+    		aluno.setFlag(true, d, 3);
+    	}
     	bttnConfirmarPerformed();
-    	aluno.setNotas(notas[0], notas[1], notas[2], d);
+    	aluno.setNotas(notas[0], notas[1], notas[2], notas[3], d);
     }
     
     private void recuperarNotasAluno(){
@@ -392,6 +424,12 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
             n3.setText(nota);
             n3.setEditable(false);
             n3.setBackground(Color.LIGHT_GRAY);
+       }
+        if (aluno.getFlag(d,3)){
+       	 	nota = String.valueOf(aluno.getN4(d));
+            n4.setText(nota);
+            n4.setEditable(false);
+            n4.setBackground(Color.LIGHT_GRAY);
        }
         DecimalFormat numberFormat = new DecimalFormat("#.00");
         nota = String.valueOf(numberFormat.format(aluno.getMedia(d)));
