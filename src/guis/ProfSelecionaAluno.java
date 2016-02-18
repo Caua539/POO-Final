@@ -132,14 +132,14 @@ public class ProfSelecionaAluno extends JFrame {
 		String plhString = listaAlunos.getSelectedValue().toString();
 		String matricula = plhString.replaceAll(" .*", "");
 		Aluno aluno = ObjArrays.buscaAluno(matricula);
-		int disciplinaAConsultar = 0;
-		for(int i=0; i < 8; i++){
+		/*int disciplinaAConsultar = 0;
+		for(int i=0; i < ObjArrays.getFinaldisc(); i++){
 			if(aluno.getDisciplinasIntArray()[i] == currentDisc.getCod()){
 				disciplinaAConsultar = i;
 				break;
 			}
-		}
-		NotasAluno notas = new NotasAluno(aluno, disciplinaAConsultar);
+		}*/
+		JanelaProfNotasAluno notas = new JanelaProfNotasAluno(aluno, lastWindow.getDiscCode()-1);
 		notas.setLastWindow(this);
 		notas.setVisible(true);
 		setVisible(false);

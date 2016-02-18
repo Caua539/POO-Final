@@ -14,7 +14,7 @@ public class Professor extends Cadastrado {
 
 	public String[] getDisciplinasMinistradas(){
 		int tamString = 0;
-		for (int i = 0; i<5; i++){
+		for (int i = 0; i<3; i++){
 			if (disciplinasMinistradas[i] != 0){
 				tamString++;
 			}

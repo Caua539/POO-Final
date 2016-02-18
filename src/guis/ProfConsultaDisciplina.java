@@ -151,4 +151,9 @@ public class ProfConsultaDisciplina extends JDialog {
 		setVisible(false);
 	}
 	
+	public int getDiscCode(){
+		int cod = ObjArrays.buscaDisciplina(professor.getSingleDisciplinaMinistrada(disciplinas.getSelectedIndex())).getCod();
+		return cod;
+	}
+	
 }

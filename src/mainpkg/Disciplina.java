@@ -54,7 +54,7 @@ public class Disciplina implements Serializable {
 	
 	public String[] getAlunoCod(){
 		int tamString = 0;
-		for (int i = 0; i<30; i++){
+		for (int i = 0; i<ObjArrays.getFinalAlun(); i++){
 			if (alunosCod[i] != null){
 				tamString++;
 			}

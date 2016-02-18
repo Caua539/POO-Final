@@ -229,6 +229,9 @@ public class ObjArrays {
 
 	
 	public static void terminaAlunCadastro(){
+		for(int i=0; i < finaldisc; i++){
+			disciplinas.get(i).addAluno(alunos.get(finalalun).getMatricula());
+		}
 		finalalun++;
 	}
 	
