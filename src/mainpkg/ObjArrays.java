@@ -69,8 +69,6 @@ public class ObjArrays {
 	}
 
 	public static void criarProfessores(Professor professor) {
-		//professores[finalprof] = new Professor();
-		//professores[finalprof] = professor;
 		professores.add(professor);
 		professores.get(finalprof).setMatricula(finalprof);
 	}

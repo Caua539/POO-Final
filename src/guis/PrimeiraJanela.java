@@ -362,18 +362,7 @@ public class PrimeiraJanela extends javax.swing.JFrame {
             }
         });
         
-        /*ObjArrays.setDisciplinas("L√≠ngua Portuguesa I", "Humanas");
-        ObjArrays.setDisciplinas("Geografia Fisica I", "Humanas");
-        ObjArrays.setDisciplinas("Hist√≥ria do Brasil I", "Humanas");
-        ObjArrays.setDisciplinas("Filosofia I", "Humanas");
-        ObjArrays.setDisciplinas("Sociologia I", "Humanas");
-        ObjArrays.setDisciplinas("Lingua Inglesa I", "Humanas");
-        ObjArrays.setDisciplinas("Matem√°tica B√°sica I", "Exatas");
-        ObjArrays.setDisciplinas("F√≠sica El√©trica I", "Exatas");
-        ObjArrays.setDisciplinas("Qu√≠mica Org√¢nica I", "Exatas");
-        ObjArrays.setDisciplinas("Ecologia I", "Biol√≥gicas");
-        ObjArrays.setDisciplinas("Gen√©tica I", "Biol√≥gicas");
-        ObjArrays.setDisciplinas("Bioqu√≠mica I", "Biol√≥gicas");*/
+        
         try {
     		FileInputStream fin = new FileInputStream("dados.txt");
 	    	ObjectInputStream ois = new ObjectInputStream(fin);
@@ -392,6 +381,21 @@ public class PrimeiraJanela extends javax.swing.JFrame {
     	catch (Exception ex){
     		ex.printStackTrace();
     	}
+        
+        if (ObjArrays.getFinaldisc() < 11){
+        	ObjArrays.setDisciplinas("LÌngua Portuguesa I", "Humanas");
+            ObjArrays.setDisciplinas("Geografia Fisica I", "Humanas");
+            ObjArrays.setDisciplinas("HistÛria do Brasil I", "Humanas");
+            ObjArrays.setDisciplinas("Filosofia I", "Humanas");
+            ObjArrays.setDisciplinas("Sociologia I", "Humanas");
+            ObjArrays.setDisciplinas("LÌngua Inglesa I", "Humanas");
+            ObjArrays.setDisciplinas("Matem·tica B·sica I", "Exatas");
+            ObjArrays.setDisciplinas("FÌsica ElÈtrica I", "Exatas");
+            ObjArrays.setDisciplinas("QuÌmica Org‚nica I", "Exatas");
+            ObjArrays.setDisciplinas("Ecologia I", "BiolÛgicas");
+            ObjArrays.setDisciplinas("GenÈtica I", "BiolÛgicas");
+            ObjArrays.setDisciplinas("BioquÌmica I", "BiolÛgicas");
+        }
         
         
     }
