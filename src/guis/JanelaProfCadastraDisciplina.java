@@ -32,13 +32,13 @@ import java.awt.Font;
  */
 public class JanelaProfCadastraDisciplina extends javax.swing.JFrame {
 	
-	private Cadastro castro;
+	private JanelaProfCadastro castro;
 	private static Disciplina[] disciplinas = new Disciplina[ObjArrays.getFinaldisc()-1];
 	private boolean discNonRepeatable = false;
 	private JComboBox[] DisciplinasVer = {null, null, null}; //Armazena as disciplinas com nome igual, serve pra verificar as que ainda estão em vermelho e branqueá-las. Pura gambiarra
 	private static String area;
 	
-	public void setCastro(Cadastro castro) {
+	public void setCastro(JanelaProfCadastro castro) {
 		this.castro = castro;
 	}
 	

@@ -27,7 +27,7 @@ import javax.swing.JLabel;
  *
  * @author Ana Luísa, Cauã
  */
-public class CadastroAlun extends javax.swing.JFrame {
+public class JanelaAlunoCadastro extends javax.swing.JFrame {
 	
 	private PrimeiraJanela inicial;
 	private boolean senhasconferem = false;
@@ -44,7 +44,7 @@ public class CadastroAlun extends javax.swing.JFrame {
     /**
      * Creates new form Protótipo
      */
-    public CadastroAlun() {
+    public JanelaAlunoCadastro() {
         initComponents();
     }
 
@@ -292,13 +292,13 @@ public class CadastroAlun extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaProfCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaProfCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaProfCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaProfCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -308,7 +308,7 @@ public class CadastroAlun extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroAlun().setVisible(true);
+                new JanelaAlunoCadastro().setVisible(true);
             }
         });
     }

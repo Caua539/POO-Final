@@ -18,7 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ProfConsultaDisciplina extends JDialog {
+public class JanelaProfSelecaoDisciplina extends JDialog {
 
 	private static Professor professor;
 	private PrimeiraJanela inicial;
@@ -40,7 +40,7 @@ public class ProfConsultaDisciplina extends JDialog {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfConsultaDisciplina dialog = new ProfConsultaDisciplina(professor);
+					JanelaProfSelecaoDisciplina dialog = new JanelaProfSelecaoDisciplina(professor);
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {
@@ -53,7 +53,7 @@ public class ProfConsultaDisciplina extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ProfConsultaDisciplina(Professor prof) {
+	public JanelaProfSelecaoDisciplina(Professor prof) {
 		professor = prof;
 		setBounds(100, 100, 371, 231);
 		
@@ -145,7 +145,7 @@ public class ProfConsultaDisciplina extends JDialog {
 	}
 	
 	public void bttnContinuarPerformed(){
-		ProfSelecionaAluno listaaluno = new ProfSelecionaAluno(ObjArrays.buscaDisciplina(professor.getSingleDisciplinaMinistrada(disciplinas.getSelectedIndex())));
+		JanelaProfSelecaoAluno listaaluno = new JanelaProfSelecaoAluno(ObjArrays.buscaDisciplina(professor.getSingleDisciplinaMinistrada(disciplinas.getSelectedIndex())));
 		listaaluno.setLastWindow(this);
 		listaaluno.setVisible(true);
 		setVisible(false);

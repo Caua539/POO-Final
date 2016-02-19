@@ -20,12 +20,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ProfSelecionaAluno extends JFrame {
+public class JanelaProfSelecaoAluno extends JFrame {
 
 	private JPanel contentPane;
 	
 	private static Disciplina currentDisc;
-	private ProfConsultaDisciplina lastWindow;
+	private JanelaProfSelecaoDisciplina lastWindow;
 	JList listaAlunos;
 	
 	public void setCurrentDisc(Disciplina disc){
@@ -33,7 +33,7 @@ public class ProfSelecionaAluno extends JFrame {
 		System.out.println(currentDisc.getNome());
 	}
 	
-	public void setLastWindow(ProfConsultaDisciplina window){
+	public void setLastWindow(JanelaProfSelecaoDisciplina window){
 		this.lastWindow = window;
 	}
 
@@ -44,7 +44,7 @@ public class ProfSelecionaAluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProfSelecionaAluno frame = new ProfSelecionaAluno(currentDisc);
+					JanelaProfSelecaoAluno frame = new JanelaProfSelecaoAluno(currentDisc);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class ProfSelecionaAluno extends JFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public ProfSelecionaAluno(Disciplina disc) {
+	public JanelaProfSelecaoAluno(Disciplina disc) {
 		this.currentDisc = disc;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

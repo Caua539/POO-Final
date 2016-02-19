@@ -29,11 +29,11 @@ public class JanelaProfNotasAluno extends javax.swing.JFrame {
 
 	
 	private static Aluno aluno;
-	private ProfSelecionaAluno lastWindow;
+	private JanelaProfSelecaoAluno lastWindow;
 	private double[] notas = {0, 0, 0, 0};
 	private static int d;
 	
-	public void setLastWindow(ProfSelecionaAluno window){
+	public void setLastWindow(JanelaProfSelecaoAluno window){
 		this.lastWindow = window;
 	}
 	
