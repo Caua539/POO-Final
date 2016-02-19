@@ -14,16 +14,16 @@ public class Disciplina implements Serializable {
 	private boolean hasAluno = false;
 	private int contadorAlunos = 0;
 	private int contadorProfs = 0;
-	private String[] alunosCod = new String[30];
-	private String[] professoresCod = new String[5];
+	private String[] alunosCod = new String[100];
+	private String[] professoresCod = new String[3];
 	
 	
 	public Disciplina(int cod, String nome, String modalidade){
 		this.cod = cod;
 		this.setNome(nome);
 		this.setModalidade(modalidade);
-		for (int i = 0; i < 5; i++) professoresCod[i] = null;
-		for (int i = 0; i < 30; i++) alunosCod[i] = null;
+		for (int i = 0; i < 3; i++) professoresCod[i] = null;
+		for (int i = 0; i < 100; i++) alunosCod[i] = null;
 	}
 	
 	public String getNome() {
@@ -54,7 +54,7 @@ public class Disciplina implements Serializable {
 	
 	public String[] getAlunoCod(){
 		int tamString = 0;
-		for (int i = 0; i<30; i++){
+		for (int i = 0; i<ObjArrays.getFinalAlun(); i++){
 			if (alunosCod[i] != null){
 				tamString++;
 			}
@@ -72,6 +72,15 @@ public class Disciplina implements Serializable {
 		this.professoresCod[contadorProfs] = matricula;
 		this.contadorProfs++;
 		this.hasProf = true;
+	}
+	
+	public boolean checaSlotProf(){
+		for(int i=0; i < 3; i++){
+			if (professoresCod[i] == null){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void addAluno(String matricula){
@@ -103,5 +112,7 @@ public class Disciplina implements Serializable {
 		if (contadorAlunos < 0) contadorAlunos = 0;
 		if (contadorAlunos == 0) this.hasAluno = false;
 	}
+	
+	
 	
 }

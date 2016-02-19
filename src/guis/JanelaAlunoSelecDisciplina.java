@@ -85,7 +85,7 @@ public class JanelaAlunoSelecDisciplina extends JDialog {
 		JLabel lblEscolhaUmaDisciplina = new JLabel("Escolha uma disciplina para consultar suas notas");
 		
 		disciplinas = new JComboBox();
-		disciplinas.setModel(new DefaultComboBoxModel(aluno.getDisciplinasCursando()));
+		disciplinas.setModel(new DefaultComboBoxModel(ObjArrays.getArrayDisciplinas()));
 		
 		JButton btnNewButton = new JButton("Continuar");
 		btnNewButton.addActionListener(new ActionListener() {
