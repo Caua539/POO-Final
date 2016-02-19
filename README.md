@@ -4,7 +4,7 @@ TRABALHO FINAL DA DISCIPLINA 'PROGRAMAÇÃO ORIENTADA A OBJETOS' OFERECIDA PELO 
 
 ############# REQUISITOS FUNCIONAIS DO SISTEMA;
 
-[REF01] - Os usuários devem fazer o seu auto cadastro com nome  e matricula;
+[REF01] - Os usuários devem fazer o seu auto cadastro com nome  e matricula;\n
 [REF02] - O sistema deve cadastrar cada disciplina e ela tem de ser validada obrigatoriamente em uma área de conhecimento.;
 [REF03] - Cada usuário tem de ser definido como aluno ou professor por sua matricula.;
 [REF04] - Cada disciplina deve ser vinculada a pelo menos um aluno e um professor.;
